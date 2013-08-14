@@ -1,0 +1,24 @@
+#! /usr/bin/env bash
+# Here we setup the environment
+# variables needed by the tinyos 
+# make system
+ 
+echo "Setting up for TinyOS"
+
+ 
+TOSROOT="/home/caio/Projects/wsn/tinyos-2.x"
+TOSDIR="$TOSROOT/tos"
+CLASSPATH=$CLASSPATH:$TOSROOT/support/sdk/java/tinyos.jar
+MAKERULES="$TOSROOT/support/make/Makerules"
+MOTECOM="serial@/dev/ttyUSB0:115200"
+PYTHONPATH=$TOSROOT/support/sdk/python:$PYTHONPATH
+
+
+
+ 
+export MOTECOM
+export TOSROOT
+export TOSDIR
+export CLASSPATH
+export PYTHONPATH
+export MAKERULES

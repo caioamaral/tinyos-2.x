@@ -1,5 +1,5 @@
-/**
- * Copyright (c) 2007 Arch Rock Corporation
+/*
+ * Copyright (c) 2005-2006 Arch Rock Corporation
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -30,25 +30,21 @@
  */
 
 /**
- * Implementation of the user button for the telos platform
+ * VoltageC is a common name for the Msp430InternalVoltageC voltage
+ * sensor available on the telosb platform.
+ *
+ * To convert from ADC counts to actual voltage, divide by 4096 and
+ * multiply by 3.
  *
  * @author Gilman Tolle <gtolle@archrock.com>
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.4 $ $Date: 2006-12-12 18:23:45 $
  */
 
-configuration HplUserButtonC {
-  provides interface GeneralIO;
-  provides interface GpioInterrupt;
+generic configuration VoltageC() {
+  provides interface Read<uint16_t>;
 }
 implementation {
-  components HplMsp430GeneralIOC as GeneralIOC;
-  components HplMsp430InterruptC as InterruptC;
-
-  components new Msp430GpioC() as UserButtonC;
-  UserButtonC -> GeneralIOC.Port61;
-  GeneralIO = UserButtonC;
-
-  components new Msp430InterruptC() as InterruptUserButtonC;
-  InterruptUserButtonC.HplInterrupt -> InterruptC.Port27;
-  GpioInterrupt = InterruptUserButtonC.Interrupt;
+  components new Msp430InternalVoltageC();
+  Read = Msp430InternalVoltageC.Read;
 }
+

@@ -13,6 +13,7 @@ implementation {
   }
 
 
+
   command error_t Init.init() {
     // reset all of the ports to be input and using i/o functionality
     atomic
@@ -33,8 +34,8 @@ implementation {
 	P3OUT = 0x00;
 	P3DIR = 0xf1;
 
-	P4OUT = 0xff;
-	P4DIR = 0xff;
+	P4OUT = 0xdd;
+	P4DIR = 0xfd;
 
 	P5OUT = 0xff;
 	P5DIR = 0xff;
@@ -50,9 +51,7 @@ implementation {
 	// directions using the TOSH_SET/CLR macros
 
 	// wait 10ms for the flash to startup
-	uwait(1024*10);
-	// Put the flash in deep sleep state
-	//TOSH_FLASH_M25P_DP();
+	//uwait(1024*10);
 
       }//atomic
     return SUCCESS;

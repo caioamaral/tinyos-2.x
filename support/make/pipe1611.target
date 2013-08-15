@@ -4,22 +4,11 @@ PLATFORM ?= pipe1611
 
 MSP_MCU = msp430f1611
 
-OPTFLAGS ?= -Os
-
-MSP_BSL ?= tos-bsl
-MSP_BSL_FLAGS = --pipe1611
-
-VOLUME_FILE = volumes-stm25p.xml
-VOLUME_ALLOCATOR ?= tos-storage-stm25p
-
 ifdef CC2420_CHANNEL
 PFLAGS += -DCC2420_DEF_CHANNEL=$(CC2420_CHANNEL)
 endif
 
 $(call TOSMake_include_platform,msp)
-
-pipe1611: $(BUILD_DEPS)
-	@:
 
 pipe1611: $(BUILD_DEPS)
 	@:

@@ -5,28 +5,23 @@
 
 push( @includes, qw(
 
-#  %T/platforms/telosb
-#  %T/platforms/telosb/chips/stm25p
-#  %T/platforms/telosa
-#  %T/platforms/telosa/chips/cc2420
-#  %T/platforms/telosa/chips/s1087
-#  %T/platforms/telosa/chips/s10871
-#  %T/platforms/telosa/chips/sht11
-#  %T/platforms/epic/chips/ds2411
-#  %T/chips/cc2420
-#  %T/chips/cc2420/alarm
-#  %T/chips/cc2420/control
-#  %T/chips/cc2420/csma
-#  %T/chips/cc2420/interfaces
-#  %T/chips/cc2420/link
-#  %T/chips/cc2420/lowpan
-#  %T/chips/cc2420/lpl
-#  %T/chips/cc2420/packet
-#  %T/chips/cc2420/receive
-#  %T/chips/cc2420/spi
-#  %T/chips/cc2420/transmit
-#  %T/chips/cc2420/unique
-#  %T/chips/cc2420/security
+  %T/platforms/pipe1611
+  %T/platforms/telosa
+  %T/platforms/telosa/chips/cc2420
+  %T/chips/cc2420
+  %T/chips/cc2420/alarm
+  %T/chips/cc2420/control
+  %T/chips/cc2420/csma
+  %T/chips/cc2420/interfaces
+  %T/chips/cc2420/link
+  %T/chips/cc2420/lowpan
+  %T/chips/cc2420/lpl
+  %T/chips/cc2420/packet
+  %T/chips/cc2420/receive
+  %T/chips/cc2420/spi
+  %T/chips/cc2420/transmit
+  %T/chips/cc2420/unique
+  %T/chips/cc2420/security
   %T/chips/msp430/x1x2/timer
   %T/chips/msp430/x1xxx
   %T/chips/msp430
@@ -37,9 +32,6 @@ push( @includes, qw(
   %T/chips/msp430/timer
   %T/chips/msp430/usart
   %T/chips/msp430/sensors
-#  %T/chips/stm25p
-#  %T/chips/sht11
-#  %T/chips/ds2401
   %T/lib/timer
   %T/lib/serial
   %T/lib/adc

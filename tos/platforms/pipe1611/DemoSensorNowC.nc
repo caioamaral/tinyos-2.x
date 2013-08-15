@@ -1,5 +1,5 @@
-/**
- * Copyright (c) 2007 Arch Rock Corporation
+/*
+ * Copyright (c) 2005-2006 Arch Rock Corporation
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -29,26 +29,33 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE
  */
 
-/**
- * Implementation of the user button for the telos platform
+/** 
+ * DemoSensorNowC is a generic sensor device that provides a 16-bit
+ * value that can be read from async context. The platform author
+ * chooses which sensor actually sits behind DemoSensorNowC, and
+ * though it's probably Voltage, Light, or Temperature, there are no
+ * guarantees.
+ *
+ * This particular DemoSensorNowC on the telosb platform provides a
+ * voltage reading, using VoltageC.
+ *
+ * To convert from ADC counts to actual voltage, divide this reading
+ * by 4096 and multiply by 3.
  *
  * @author Gilman Tolle <gtolle@archrock.com>
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.4 $ $Date: 2006-12-12 18:23:45 $
+ * 
  */
 
-configuration HplUserButtonC {
-  provides interface GeneralIO;
-  provides interface GpioInterrupt;
+generic configuration DemoSensorNowC()
+{
+  provides interface Resource;
+  provides interface ReadNow<uint16_t>;
 }
-implementation {
-  components HplMsp430GeneralIOC as GeneralIOC;
-  components HplMsp430InterruptC as InterruptC;
+implementation
+{
+  components new Msp430InternalVoltageC() as DemoSensorNow;
 
-  components new Msp430GpioC() as UserButtonC;
-  UserButtonC -> GeneralIOC.Port61;
-  GeneralIO = UserButtonC;
-
-  components new Msp430InterruptC() as InterruptUserButtonC;
-  InterruptUserButtonC.HplInterrupt -> InterruptC.Port27;
-  GpioInterrupt = InterruptUserButtonC.Interrupt;
+  Resource = DemoSensorNow;
+  ReadNow = DemoSensorNow;
 }

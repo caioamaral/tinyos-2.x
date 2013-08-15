@@ -1,11 +1,11 @@
 <tos_image>
   <ident>
-    <uidhash>693BAF5CL</uidhash>
+    <uidhash>FE02F42EL</uidhash>
     <hostname>caio-ubuntu</hostname>
     <username>caio</username>
     <appname>BlinkAppC</appname>
     <userhash>47755207L</userhash>
-    <timestamp>520C0A6EL</timestamp>
+    <timestamp>520CF68CL</timestamp>
     <deluge_support>no</deluge_support>
     <platform>telosb</platform>
   </ident>

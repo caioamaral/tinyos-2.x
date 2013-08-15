@@ -32,7 +32,7 @@
 /**
  * Implementation of the user button for the telosb platform
  *
- * @author Gilman Tolle <gtolle@archrock.com> (Edited By Caio Amaral)
+ * @author Gilman Tolle <gtolle@archrock.com>
  * @version $Revision: 1.2 $
  */
 
@@ -48,7 +48,7 @@ module UserButtonP {
 implementation {
   
   command button_state_t Get.get() { 
-    // telosb, such as our mote, user button pin is high when released - invert state
+    // telosb user button pin is high when released - invert state
     if ( call GetLower.get() ) {
       return BUTTON_RELEASED;
     } else {

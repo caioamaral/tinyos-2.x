@@ -1,0 +1,347 @@
+<?xml version="1.0" ?><component loc="40:/home/caio/Projects/wsn/tinyos-2.x/tos/platforms/pipe1611/hardware/leds/PlatformLedsC.nc" nicename="tos.platforms.pipe1611.hardware.leds.PlatformLedsC" qname="PlatformLedsC">
+      <documentation loc="34:/home/caio/Projects/wsn/tinyos-2.x/tos/platforms/pipe1611/hardware/leds/PlatformLedsC.nc">
+        <short>
+ </short>
+        <long>
+ @author Joe Polastre
+ @version $Revision: 1.5 $ $Date: 2010-06-29 22:07:55 $
+</long>
+      </documentation>
+      <configuration/>
+      <wiring>
+        <wire loc="58:/home/caio/Projects/wsn/tinyos-2.x/tos/platforms/pipe1611/hardware/leds/PlatformLedsC.nc">
+          <from><interface-ref name="Led0" ref="0x2ab0d3a01020" scoped=""/></from>
+          <to><interface-ref name="GeneralIO" ref="0x2ab0d3c27b70" scoped=""/></to>
+        </wire>
+        <wire loc="61:/home/caio/Projects/wsn/tinyos-2.x/tos/platforms/pipe1611/hardware/leds/PlatformLedsC.nc">
+          <from><interface-ref name="Led1" ref="0x2ab0d3a001b0" scoped=""/></from>
+          <to><interface-ref name="GeneralIO" ref="0x2ab0d3c3a7d0" scoped=""/></to>
+        </wire>
+        <wire loc="64:/home/caio/Projects/wsn/tinyos-2.x/tos/platforms/pipe1611/hardware/leds/PlatformLedsC.nc">
+          <from><interface-ref name="Led2" ref="0x2ab0d39ff378" scoped=""/></from>
+          <to><interface-ref name="GeneralIO" ref="0x2ab0d3c5d350" scoped=""/></to>
+        </wire>
+        <wire loc="56:/home/caio/Projects/wsn/tinyos-2.x/tos/platforms/pipe1611/hardware/leds/PlatformLedsC.nc">
+          <from><interface-ref name="LedsInit" ref="0x2ab0d37f7370" scoped=""/></from>
+          <to><interface-ref name="Init" ref="0x2ab0d39fe460" scoped=""/></to>
+        </wire>
+        <wire loc="59:/home/caio/Projects/wsn/tinyos-2.x/tos/platforms/pipe1611/hardware/leds/PlatformLedsC.nc">
+          <from><interface-ref name="HplGeneralIO" ref="0x2ab0d3c26da0" scoped=""/></from>
+          <to><interface-ref name="Port60" ref="0x2ab0d3a7a978" scoped=""/></to>
+        </wire>
+        <wire loc="62:/home/caio/Projects/wsn/tinyos-2.x/tos/platforms/pipe1611/hardware/leds/PlatformLedsC.nc">
+          <from><interface-ref name="HplGeneralIO" ref="0x2ab0d3c39908" scoped=""/></from>
+          <to><interface-ref name="Port54" ref="0x2ab0d3a61020" scoped=""/></to>
+        </wire>
+        <wire loc="65:/home/caio/Projects/wsn/tinyos-2.x/tos/platforms/pipe1611/hardware/leds/PlatformLedsC.nc">
+          <from><interface-ref name="HplGeneralIO" ref="0x2ab0d3c5c470" scoped=""/></from>
+          <to><interface-ref name="Port55" ref="0x2ab0d3a5f140" scoped=""/></to>
+        </wire>
+      </wiring>
+    <specification><interface loc="41:/home/caio/Projects/wsn/tinyos-2.x/tos/platforms/pipe1611/hardware/leds/PlatformLedsC.nc" name="Led0" provided="1" ref="0x2ab0d3a01020">
+      <component-ref nicename="tos.platforms.pipe1611.hardware.leds.PlatformLedsC" qname="PlatformLedsC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Led0" ref="0x2ab0d3a01020" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.GeneralIO" qname="GeneralIO"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="makeInput" ref="0x2ab0d3a01370" scoped=""/>
+        <function-ref name="isInput" ref="0x2ab0d3a014f8" scoped=""/>
+        <function-ref name="toggle" ref="0x2ab0d3a01680" scoped=""/>
+        <function-ref name="isOutput" ref="0x2ab0d3a01808" scoped=""/>
+        <function-ref name="get" ref="0x2ab0d3a01990" scoped=""/>
+        <function-ref name="makeOutput" ref="0x2ab0d3a01b18" scoped=""/>
+        <function-ref name="set" ref="0x2ab0d3a01ca0" scoped=""/>
+        <function-ref name="clr" ref="0x2ab0d3a01e28" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="42:/home/caio/Projects/wsn/tinyos-2.x/tos/platforms/pipe1611/hardware/leds/PlatformLedsC.nc" name="Led1" provided="1" ref="0x2ab0d3a001b0">
+      <component-ref nicename="tos.platforms.pipe1611.hardware.leds.PlatformLedsC" qname="PlatformLedsC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Led1" ref="0x2ab0d3a001b0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.GeneralIO" qname="GeneralIO"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="makeInput" ref="0x2ab0d3a00500" scoped=""/>
+        <function-ref name="isInput" ref="0x2ab0d3a00688" scoped=""/>
+        <function-ref name="toggle" ref="0x2ab0d3a00810" scoped=""/>
+        <function-ref name="isOutput" ref="0x2ab0d3a00998" scoped=""/>
+        <function-ref name="get" ref="0x2ab0d3a00b20" scoped=""/>
+        <function-ref name="makeOutput" ref="0x2ab0d3a00ca8" scoped=""/>
+        <function-ref name="set" ref="0x2ab0d3a00e30" scoped=""/>
+        <function-ref name="clr" ref="0x2ab0d39ff020" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="44:/home/caio/Projects/wsn/tinyos-2.x/tos/platforms/pipe1611/hardware/leds/PlatformLedsC.nc" name="Init" provided="0" ref="0x2ab0d39fe460">
+      <component-ref nicename="tos.platforms.pipe1611.hardware.leds.PlatformLedsC" qname="PlatformLedsC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Init" ref="0x2ab0d39fe460" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Init" qname="Init"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="init" ref="0x2ab0d39fe7b0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="43:/home/caio/Projects/wsn/tinyos-2.x/tos/platforms/pipe1611/hardware/leds/PlatformLedsC.nc" name="Led2" provided="1" ref="0x2ab0d39ff378">
+      <component-ref nicename="tos.platforms.pipe1611.hardware.leds.PlatformLedsC" qname="PlatformLedsC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Led2" ref="0x2ab0d39ff378" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.GeneralIO" qname="GeneralIO"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="makeInput" ref="0x2ab0d39ff6c8" scoped=""/>
+        <function-ref name="isInput" ref="0x2ab0d39ff850" scoped=""/>
+        <function-ref name="toggle" ref="0x2ab0d39ff9d8" scoped=""/>
+        <function-ref name="isOutput" ref="0x2ab0d39ffb60" scoped=""/>
+        <function-ref name="get" ref="0x2ab0d39ffce8" scoped=""/>
+        <function-ref name="makeOutput" ref="0x2ab0d39ffe70" scoped=""/>
+        <function-ref name="set" ref="0x2ab0d39fe020" scoped=""/>
+        <function-ref name="clr" ref="0x2ab0d39fe1a8" scoped=""/>
+      </interface-functions>
+    </interface></specification><referenced><interface loc="44:/home/caio/Projects/wsn/tinyos-2.x/tos/chips/msp430/pins/Msp430GpioC.nc" name="HplGeneralIO" provided="0" ref="0x2ab0d3c39908">
+      <component-ref nicename="tos.chips.msp430.pins.Msp430GpioC" qname="PlatformLedsC.Led1Impl"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="HplGeneralIO" ref="0x2ab0d3c39908" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.chips.msp430.pins.HplMsp430GeneralIO" qname="HplMsp430GeneralIO"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="makeInput" ref="0x2ab0d3c39c58" scoped=""/>
+        <function-ref name="isInput" ref="0x2ab0d3c39de0" scoped=""/>
+        <function-ref name="setResistor" ref="0x2ab0d3c38020" scoped=""/>
+        <function-ref name="toggle" ref="0x2ab0d3c381a8" scoped=""/>
+        <function-ref name="isOutput" ref="0x2ab0d3c38330" scoped=""/>
+        <function-ref name="getResistor" ref="0x2ab0d3c384b8" scoped=""/>
+        <function-ref name="setDriveStrength" ref="0x2ab0d3c38640" scoped=""/>
+        <function-ref name="makeOutput" ref="0x2ab0d3c387c8" scoped=""/>
+        <function-ref name="get" ref="0x2ab0d3c38950" scoped=""/>
+        <function-ref name="getDriveStrength" ref="0x2ab0d3c38ad8" scoped=""/>
+        <function-ref name="selectIOFunc" ref="0x2ab0d3c38c60" scoped=""/>
+        <function-ref name="getRaw" ref="0x2ab0d3c38de8" scoped=""/>
+        <function-ref name="set" ref="0x2ab0d3c37020" scoped=""/>
+        <function-ref name="selectModuleFunc" ref="0x2ab0d3c372a8" scoped=""/>
+        <function-ref name="isIOFunc" ref="0x2ab0d3c37430" scoped=""/>
+        <function-ref name="isModuleFunc" ref="0x2ab0d3c375b8" scoped=""/>
+        <function-ref name="clr" ref="0x2ab0d3c37740" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="7:/home/caio/Projects/wsn/tinyos-2.x/tos/platforms/telosa/PlatformP.nc" name="LedsInit" provided="0" ref="0x2ab0d37f7370">
+      <component-ref nicename="tos.platforms.telosa.PlatformP" qname="PlatformP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="LedsInit" ref="0x2ab0d37f7370" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Init" qname="Init"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="init" ref="0x2ab0d37f76c0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="44:/home/caio/Projects/wsn/tinyos-2.x/tos/chips/msp430/pins/Msp430GpioC.nc" name="HplGeneralIO" provided="0" ref="0x2ab0d3c26da0">
+      <component-ref nicename="tos.chips.msp430.pins.Msp430GpioC" qname="PlatformLedsC.Led0Impl"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="HplGeneralIO" ref="0x2ab0d3c26da0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.chips.msp430.pins.HplMsp430GeneralIO" qname="HplMsp430GeneralIO"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="makeInput" ref="0x2ab0d3c3d170" scoped=""/>
+        <function-ref name="isInput" ref="0x2ab0d3c3d2f8" scoped=""/>
+        <function-ref name="setResistor" ref="0x2ab0d3c3d480" scoped=""/>
+        <function-ref name="toggle" ref="0x2ab0d3c3d608" scoped=""/>
+        <function-ref name="isOutput" ref="0x2ab0d3c3d790" scoped=""/>
+        <function-ref name="getResistor" ref="0x2ab0d3c3d918" scoped=""/>
+        <function-ref name="setDriveStrength" ref="0x2ab0d3c3daa0" scoped=""/>
+        <function-ref name="makeOutput" ref="0x2ab0d3c3dc28" scoped=""/>
+        <function-ref name="get" ref="0x2ab0d3c3ddb0" scoped=""/>
+        <function-ref name="getDriveStrength" ref="0x2ab0d3c3c020" scoped=""/>
+        <function-ref name="selectIOFunc" ref="0x2ab0d3c3c1a8" scoped=""/>
+        <function-ref name="getRaw" ref="0x2ab0d3c3c330" scoped=""/>
+        <function-ref name="set" ref="0x2ab0d3c3c4b8" scoped=""/>
+        <function-ref name="selectModuleFunc" ref="0x2ab0d3c3c740" scoped=""/>
+        <function-ref name="isIOFunc" ref="0x2ab0d3c3c8c8" scoped=""/>
+        <function-ref name="isModuleFunc" ref="0x2ab0d3c3ca50" scoped=""/>
+        <function-ref name="clr" ref="0x2ab0d3c3cbd8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="43:/home/caio/Projects/wsn/tinyos-2.x/tos/chips/msp430/pins/Msp430GpioC.nc" name="GeneralIO" provided="1" ref="0x2ab0d3c5d350">
+      <component-ref nicename="tos.chips.msp430.pins.Msp430GpioC" qname="PlatformLedsC.Led2Impl"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="GeneralIO" ref="0x2ab0d3c5d350" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.GeneralIO" qname="GeneralIO"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="makeInput" ref="0x2ab0d3c5d6a0" scoped=""/>
+        <function-ref name="isInput" ref="0x2ab0d3c5d828" scoped=""/>
+        <function-ref name="toggle" ref="0x2ab0d3c5d9b0" scoped=""/>
+        <function-ref name="isOutput" ref="0x2ab0d3c5db38" scoped=""/>
+        <function-ref name="get" ref="0x2ab0d3c5dcc0" scoped=""/>
+        <function-ref name="makeOutput" ref="0x2ab0d3c5de48" scoped=""/>
+        <function-ref name="set" ref="0x2ab0d3c5c020" scoped=""/>
+        <function-ref name="clr" ref="0x2ab0d3c5c1a8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="99:/home/caio/Projects/wsn/tinyos-2.x/tos/chips/msp430/pins/HplMsp430GeneralIOC.nc" name="Port55" provided="1" ref="0x2ab0d3a5f140">
+      <component-ref nicename="tos.chips.msp430.pins.HplMsp430GeneralIOC" qname="HplMsp430GeneralIOC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Port55" ref="0x2ab0d3a5f140" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.chips.msp430.pins.HplMsp430GeneralIO" qname="HplMsp430GeneralIO"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="makeInput" ref="0x2ab0d3a5f490" scoped=""/>
+        <function-ref name="isInput" ref="0x2ab0d3a5f618" scoped=""/>
+        <function-ref name="setResistor" ref="0x2ab0d3a5f7a0" scoped=""/>
+        <function-ref name="toggle" ref="0x2ab0d3a5f928" scoped=""/>
+        <function-ref name="isOutput" ref="0x2ab0d3a5fab0" scoped=""/>
+        <function-ref name="getResistor" ref="0x2ab0d3a5fc38" scoped=""/>
+        <function-ref name="setDriveStrength" ref="0x2ab0d3a5fdc0" scoped=""/>
+        <function-ref name="makeOutput" ref="0x2ab0d3a5e020" scoped=""/>
+        <function-ref name="get" ref="0x2ab0d3a5e1a8" scoped=""/>
+        <function-ref name="getDriveStrength" ref="0x2ab0d3a5e330" scoped=""/>
+        <function-ref name="selectIOFunc" ref="0x2ab0d3a5e4b8" scoped=""/>
+        <function-ref name="getRaw" ref="0x2ab0d3a5e640" scoped=""/>
+        <function-ref name="set" ref="0x2ab0d3a5e7c8" scoped=""/>
+        <function-ref name="selectModuleFunc" ref="0x2ab0d3a5ea50" scoped=""/>
+        <function-ref name="isIOFunc" ref="0x2ab0d3a5ebd8" scoped=""/>
+        <function-ref name="isModuleFunc" ref="0x2ab0d3a5ed60" scoped=""/>
+        <function-ref name="clr" ref="0x2ab0d3a7e020" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="43:/home/caio/Projects/wsn/tinyos-2.x/tos/chips/msp430/pins/Msp430GpioC.nc" name="GeneralIO" provided="1" ref="0x2ab0d3c3a7d0">
+      <component-ref nicename="tos.chips.msp430.pins.Msp430GpioC" qname="PlatformLedsC.Led1Impl"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="GeneralIO" ref="0x2ab0d3c3a7d0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.GeneralIO" qname="GeneralIO"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="makeInput" ref="0x2ab0d3c3ab20" scoped=""/>
+        <function-ref name="isInput" ref="0x2ab0d3c3aca8" scoped=""/>
+        <function-ref name="toggle" ref="0x2ab0d3c3ae30" scoped=""/>
+        <function-ref name="isOutput" ref="0x2ab0d3c39020" scoped=""/>
+        <function-ref name="get" ref="0x2ab0d3c391a8" scoped=""/>
+        <function-ref name="makeOutput" ref="0x2ab0d3c39330" scoped=""/>
+        <function-ref name="set" ref="0x2ab0d3c394b8" scoped=""/>
+        <function-ref name="clr" ref="0x2ab0d3c39640" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="43:/home/caio/Projects/wsn/tinyos-2.x/tos/chips/msp430/pins/Msp430GpioC.nc" name="GeneralIO" provided="1" ref="0x2ab0d3c27b70">
+      <component-ref nicename="tos.chips.msp430.pins.Msp430GpioC" qname="PlatformLedsC.Led0Impl"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="GeneralIO" ref="0x2ab0d3c27b70" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.GeneralIO" qname="GeneralIO"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="makeInput" ref="0x2ab0d3c26020" scoped=""/>
+        <function-ref name="isInput" ref="0x2ab0d3c261a8" scoped=""/>
+        <function-ref name="toggle" ref="0x2ab0d3c26330" scoped=""/>
+        <function-ref name="isOutput" ref="0x2ab0d3c264b8" scoped=""/>
+        <function-ref name="get" ref="0x2ab0d3c26640" scoped=""/>
+        <function-ref name="makeOutput" ref="0x2ab0d3c267c8" scoped=""/>
+        <function-ref name="set" ref="0x2ab0d3c26950" scoped=""/>
+        <function-ref name="clr" ref="0x2ab0d3c26ad8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="105:/home/caio/Projects/wsn/tinyos-2.x/tos/chips/msp430/pins/HplMsp430GeneralIOC.nc" name="Port60" provided="1" ref="0x2ab0d3a7a978">
+      <component-ref nicename="tos.chips.msp430.pins.HplMsp430GeneralIOC" qname="HplMsp430GeneralIOC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Port60" ref="0x2ab0d3a7a978" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.chips.msp430.pins.HplMsp430GeneralIO" qname="HplMsp430GeneralIO"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="makeInput" ref="0x2ab0d3a7acc8" scoped=""/>
+        <function-ref name="isInput" ref="0x2ab0d3a7ae50" scoped=""/>
+        <function-ref name="setResistor" ref="0x2ab0d3a79020" scoped=""/>
+        <function-ref name="toggle" ref="0x2ab0d3a791a8" scoped=""/>
+        <function-ref name="isOutput" ref="0x2ab0d3a79330" scoped=""/>
+        <function-ref name="getResistor" ref="0x2ab0d3a794b8" scoped=""/>
+        <function-ref name="setDriveStrength" ref="0x2ab0d3a79640" scoped=""/>
+        <function-ref name="makeOutput" ref="0x2ab0d3a797c8" scoped=""/>
+        <function-ref name="get" ref="0x2ab0d3a79950" scoped=""/>
+        <function-ref name="getDriveStrength" ref="0x2ab0d3a79ad8" scoped=""/>
+        <function-ref name="selectIOFunc" ref="0x2ab0d3a79c60" scoped=""/>
+        <function-ref name="getRaw" ref="0x2ab0d3a79de8" scoped=""/>
+        <function-ref name="set" ref="0x2ab0d3a78020" scoped=""/>
+        <function-ref name="selectModuleFunc" ref="0x2ab0d3a782a8" scoped=""/>
+        <function-ref name="isIOFunc" ref="0x2ab0d3a78430" scoped=""/>
+        <function-ref name="isModuleFunc" ref="0x2ab0d3a785b8" scoped=""/>
+        <function-ref name="clr" ref="0x2ab0d3a78740" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="98:/home/caio/Projects/wsn/tinyos-2.x/tos/chips/msp430/pins/HplMsp430GeneralIOC.nc" name="Port54" provided="1" ref="0x2ab0d3a61020">
+      <component-ref nicename="tos.chips.msp430.pins.HplMsp430GeneralIOC" qname="HplMsp430GeneralIOC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Port54" ref="0x2ab0d3a61020" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.chips.msp430.pins.HplMsp430GeneralIO" qname="HplMsp430GeneralIO"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="makeInput" ref="0x2ab0d3a61370" scoped=""/>
+        <function-ref name="isInput" ref="0x2ab0d3a614f8" scoped=""/>
+        <function-ref name="setResistor" ref="0x2ab0d3a61680" scoped=""/>
+        <function-ref name="toggle" ref="0x2ab0d3a61808" scoped=""/>
+        <function-ref name="isOutput" ref="0x2ab0d3a61990" scoped=""/>
+        <function-ref name="getResistor" ref="0x2ab0d3a61b18" scoped=""/>
+        <function-ref name="setDriveStrength" ref="0x2ab0d3a61ca0" scoped=""/>
+        <function-ref name="makeOutput" ref="0x2ab0d3a61e28" scoped=""/>
+        <function-ref name="get" ref="0x2ab0d3a60020" scoped=""/>
+        <function-ref name="getDriveStrength" ref="0x2ab0d3a601a8" scoped=""/>
+        <function-ref name="selectIOFunc" ref="0x2ab0d3a60330" scoped=""/>
+        <function-ref name="getRaw" ref="0x2ab0d3a604b8" scoped=""/>
+        <function-ref name="set" ref="0x2ab0d3a60640" scoped=""/>
+        <function-ref name="selectModuleFunc" ref="0x2ab0d3a608c8" scoped=""/>
+        <function-ref name="isIOFunc" ref="0x2ab0d3a60a50" scoped=""/>
+        <function-ref name="isModuleFunc" ref="0x2ab0d3a60bd8" scoped=""/>
+        <function-ref name="clr" ref="0x2ab0d3a60d60" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="44:/home/caio/Projects/wsn/tinyos-2.x/tos/chips/msp430/pins/Msp430GpioC.nc" name="HplGeneralIO" provided="0" ref="0x2ab0d3c5c470">
+      <component-ref nicename="tos.chips.msp430.pins.Msp430GpioC" qname="PlatformLedsC.Led2Impl"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="HplGeneralIO" ref="0x2ab0d3c5c470" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.chips.msp430.pins.HplMsp430GeneralIO" qname="HplMsp430GeneralIO"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="makeInput" ref="0x2ab0d3c5c7c0" scoped=""/>
+        <function-ref name="isInput" ref="0x2ab0d3c5c948" scoped=""/>
+        <function-ref name="setResistor" ref="0x2ab0d3c5cad0" scoped=""/>
+        <function-ref name="toggle" ref="0x2ab0d3c5cc58" scoped=""/>
+        <function-ref name="isOutput" ref="0x2ab0d3c5cde0" scoped=""/>
+        <function-ref name="getResistor" ref="0x2ab0d3c5b020" scoped=""/>
+        <function-ref name="setDriveStrength" ref="0x2ab0d3c5b1a8" scoped=""/>
+        <function-ref name="makeOutput" ref="0x2ab0d3c5b330" scoped=""/>
+        <function-ref name="get" ref="0x2ab0d3c5b4b8" scoped=""/>
+        <function-ref name="getDriveStrength" ref="0x2ab0d3c5b640" scoped=""/>
+        <function-ref name="selectIOFunc" ref="0x2ab0d3c5b7c8" scoped=""/>
+        <function-ref name="getRaw" ref="0x2ab0d3c5b950" scoped=""/>
+        <function-ref name="set" ref="0x2ab0d3c5bad8" scoped=""/>
+        <function-ref name="selectModuleFunc" ref="0x2ab0d3c5bd60" scoped=""/>
+        <function-ref name="isIOFunc" ref="0x2ab0d3c5a020" scoped=""/>
+        <function-ref name="isModuleFunc" ref="0x2ab0d3c5a1a8" scoped=""/>
+        <function-ref name="clr" ref="0x2ab0d3c5a330" scoped=""/>
+      </interface-functions>
+    </interface><component loc="42(PlatformLedsC.Led0Impl):/home/caio/Projects/wsn/tinyos-2.x/tos/chips/msp430/pins/Msp430GpioC.nc" nicename="tos.chips.msp430.pins.Msp430GpioC" qname="PlatformLedsC.Led0Impl">
+      <documentation loc="33:/home/caio/Projects/wsn/tinyos-2.x/tos/chips/msp430/pins/Msp430GpioC.nc">
+        <short>
+ Implementation of the general-purpose I/O abstraction
+ for the TI MSP430 microcontroller.</short>
+        <long>
+ Implementation of the general-purpose I/O abstraction
+ for the TI MSP430 microcontroller.
+
+ @author Joe Polastre
+ @see  Please refer to TEP 117 for more information about this component and its
+          intended use.
+</long>
+      </documentation>
+      <instance number="0">
+        <component-ref nicename="tos.chips.msp430.pins.Msp430GpioC" qname="Msp430GpioC"/>
+      </instance>
+      <module/>
+    </component><component loc="3:/home/caio/Projects/wsn/tinyos-2.x/tos/platforms/telosa/PlatformP.nc" nicename="tos.platforms.telosa.PlatformP" qname="PlatformP" safe="">
+      <module/>
+    </component><component loc="42(PlatformLedsC.Led1Impl):/home/caio/Projects/wsn/tinyos-2.x/tos/chips/msp430/pins/Msp430GpioC.nc" nicename="tos.chips.msp430.pins.Msp430GpioC" qname="PlatformLedsC.Led1Impl">
+      <documentation loc="33:/home/caio/Projects/wsn/tinyos-2.x/tos/chips/msp430/pins/Msp430GpioC.nc">
+        <short>
+ Implementation of the general-purpose I/O abstraction
+ for the TI MSP430 microcontroller.</short>
+        <long>
+ Implementation of the general-purpose I/O abstraction
+ for the TI MSP430 microcontroller.
+
+ @author Joe Polastre
+ @see  Please refer to TEP 117 for more information about this component and its
+          intended use.
+</long>
+      </documentation>
+      <instance number="1">
+        <component-ref nicename="tos.chips.msp430.pins.Msp430GpioC" qname="Msp430GpioC"/>
+      </instance>
+      <module/>
+    </component><component loc="47:/home/caio/Projects/wsn/tinyos-2.x/tos/chips/msp430/pins/HplMsp430GeneralIOC.nc" nicename="tos.chips.msp430.pins.HplMsp430GeneralIOC" qname="HplMsp430GeneralIOC">
+      <documentation loc="37:/home/caio/Projects/wsn/tinyos-2.x/tos/chips/msp430/pins/HplMsp430GeneralIOC.nc">
+        <short>
+ Digital pin i/o abstraction, TI MSP430 processors.</short>
+        <long>

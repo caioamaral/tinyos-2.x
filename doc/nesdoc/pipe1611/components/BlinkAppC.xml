@@ -1,0 +1,395 @@
+<?xml version="1.0" ?><component loc="51:BlinkAppC.nc" nicename="BlinkAppC" qname="BlinkAppC">
+      <documentation loc="43:BlinkAppC.nc">
+        <short>
+ Blink is a basic application that toggles a mote's LED periodically.</short>
+        <long>
+ Blink is a basic application that toggles a mote's LED periodically.
+ It does so by starting a Timer that fires every second. It uses the
+ OSKI TimerMilli service to achieve this goal.
+
+ @author tinyos-help@millennium.berkeley.edu
+*</long>
+      </documentation>
+      <configuration/>
+      <wiring>
+        <wire loc="62:BlinkAppC.nc">
+          <from><interface-ref name="Boot" ref="0x2ab0d39c12d8" scoped=""/></from>
+          <to><interface-ref name="Boot" ref="0x2ab0d37ff940" scoped=""/></to>
+        </wire>
+        <wire loc="64:BlinkAppC.nc">
+          <from><interface-ref name="Timer0" ref="0x2ab0d39b3dd0" scoped=""/></from>
+          <to><interface-ref name="Timer" ref="0x2ab0d3c4ea60" scoped=""/></to>
+        </wire>
+        <wire loc="65:BlinkAppC.nc">
+          <from><interface-ref name="Timer1" ref="0x2ab0d39cd020" scoped=""/></from>
+          <to><interface-ref name="Timer" ref="0x2ab0d3df2020" scoped=""/></to>
+        </wire>
+        <wire loc="66:BlinkAppC.nc">
+          <from><interface-ref name="Timer2" ref="0x2ab0d39c81d0" scoped=""/></from>
+          <to><interface-ref name="Timer" ref="0x2ab0d3dec550" scoped=""/></to>
+        </wire>
+        <wire loc="67:BlinkAppC.nc">
+          <from><interface-ref name="Leds" ref="0x2ab0d39d6c38" scoped=""/></from>
+          <to><interface-ref name="Leds" ref="0x2ab0d39a4d00" scoped=""/></to>
+        </wire>
+      </wiring>
+    <specification/><referenced><interface loc="46:/home/caio/Projects/wsn/tinyos-2.x/tos/system/LedsC.nc" name="Leds" provided="1" ref="0x2ab0d39a4d00">
+      <component-ref nicename="tos.system.LedsC" qname="LedsC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Leds" ref="0x2ab0d39a4d00" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Leds" qname="Leds"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="led0Off" ref="0x2ab0d39ea0a0" scoped=""/>
+        <function-ref name="led0Toggle" ref="0x2ab0d39ea228" scoped=""/>
+        <function-ref name="led1On" ref="0x2ab0d39ea3b0" scoped=""/>
+        <function-ref name="led1Toggle" ref="0x2ab0d39ea538" scoped=""/>
+        <function-ref name="led2Toggle" ref="0x2ab0d39ea6c0" scoped=""/>
+        <function-ref name="get" ref="0x2ab0d39ea848" scoped=""/>
+        <function-ref name="led1Off" ref="0x2ab0d39ea9d0" scoped=""/>
+        <function-ref name="led2Off" ref="0x2ab0d39e9020" scoped=""/>
+        <function-ref name="set" ref="0x2ab0d39eab58" scoped=""/>
+        <function-ref name="led0On" ref="0x2ab0d39eace0" scoped=""/>
+        <function-ref name="led2On" ref="0x2ab0d39eae68" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="55:BlinkC.nc" name="Leds" provided="0" ref="0x2ab0d39d6c38">
+      <component-ref nicename="BlinkC" qname="BlinkC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Leds" ref="0x2ab0d39d6c38" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Leds" qname="Leds"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="led0Off" ref="0x2ab0d39c2020" scoped=""/>
+        <function-ref name="led0Toggle" ref="0x2ab0d39c21a8" scoped=""/>
+        <function-ref name="led1On" ref="0x2ab0d39c2330" scoped=""/>
+        <function-ref name="led1Toggle" ref="0x2ab0d39c24b8" scoped=""/>
+        <function-ref name="led2Toggle" ref="0x2ab0d39c2640" scoped=""/>
+        <function-ref name="get" ref="0x2ab0d39c27c8" scoped=""/>
+        <function-ref name="led1Off" ref="0x2ab0d39c2950" scoped=""/>
+        <function-ref name="led2Off" ref="0x2ab0d39c1020" scoped=""/>
+        <function-ref name="set" ref="0x2ab0d39c2ad8" scoped=""/>
+        <function-ref name="led0On" ref="0x2ab0d39c2c60" scoped=""/>
+        <function-ref name="led2On" ref="0x2ab0d39c2de8" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="54:BlinkC.nc" name="Timer2" provided="0" ref="0x2ab0d39c81d0">
+      <component-ref nicename="BlinkC" qname="BlinkC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Timer2" ref="0x2ab0d39c81d0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.timer.Timer" qname="Timer"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x2ab0d37eae88"/>
+            <typename><typedef-ref name="TMilli" ref="0x2ab0d39c0230"/></typename>
+          </type-tag>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="getNow" ref="0x2ab0d39c45f0" scoped=""/>
+        <function-ref name="fired" ref="0x2ab0d39c7af0" scoped=""/>
+        <function-ref name="startPeriodicAt" ref="0x2ab0d39c68c0" scoped=""/>
+        <function-ref name="isOneShot" ref="0x2ab0d39c6470" scoped=""/>
+        <function-ref name="getdt" ref="0x2ab0d39c3020" scoped=""/>
+        <function-ref name="gett0" ref="0x2ab0d39c4a40" scoped=""/>
+        <function-ref name="isRunning" ref="0x2ab0d39c6020" scoped=""/>
+        <function-ref name="startPeriodic" ref="0x2ab0d39c8d18" scoped=""/>
+        <function-ref name="startOneShotAt" ref="0x2ab0d39c4020" scoped=""/>
+        <function-ref name="startOneShot" ref="0x2ab0d39c7200" scoped=""/>
+        <function-ref name="stop" ref="0x2ab0d39c76a0" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="45:/home/caio/Projects/wsn/tinyos-2.x/tos/system/TimerMilliC.nc" name="Timer" provided="1" ref="0x2ab0d3df2020">
+      <component-ref nicename="tos.system.TimerMilliC" qname="BlinkAppC.Timer1"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Timer" ref="0x2ab0d3df2020" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.timer.Timer" qname="Timer"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x2ab0d37eae88"/>
+            <typename><typedef-ref name="TMilli" ref="0x2ab0d39c0230"/></typename>
+          </type-tag>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="getNow" ref="0x2ab0d3dee2b8" scoped=""/>
+        <function-ref name="fired" ref="0x2ab0d3df1978" scoped=""/>
+        <function-ref name="startPeriodicAt" ref="0x2ab0d3def6c8" scoped=""/>
+        <function-ref name="isOneShot" ref="0x2ab0d3def278" scoped=""/>
+        <function-ref name="getdt" ref="0x2ab0d3deeb58" scoped=""/>
+        <function-ref name="gett0" ref="0x2ab0d3dee708" scoped=""/>
+        <function-ref name="isRunning" ref="0x2ab0d3df1dc8" scoped=""/>
+        <function-ref name="startPeriodic" ref="0x2ab0d3df2b68" scoped=""/>
+        <function-ref name="startOneShotAt" ref="0x2ab0d3defc98" scoped=""/>
+        <function-ref name="startOneShot" ref="0x2ab0d3df1088" scoped=""/>
+        <function-ref name="stop" ref="0x2ab0d3df1528" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="56:BlinkC.nc" name="Boot" provided="0" ref="0x2ab0d39c12d8">
+      <component-ref nicename="BlinkC" qname="BlinkC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Boot" ref="0x2ab0d39c12d8" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Boot" qname="Boot"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="booted" ref="0x2ab0d39c1628" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="45:/home/caio/Projects/wsn/tinyos-2.x/tos/system/TimerMilliC.nc" name="Timer" provided="1" ref="0x2ab0d3dec550">
+      <component-ref nicename="tos.system.TimerMilliC" qname="BlinkAppC.Timer2"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Timer" ref="0x2ab0d3dec550" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.timer.Timer" qname="Timer"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x2ab0d37eae88"/>
+            <typename><typedef-ref name="TMilli" ref="0x2ab0d39c0230"/></typename>
+          </type-tag>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="getNow" ref="0x2ab0d3e18768" scoped=""/>
+        <function-ref name="fired" ref="0x2ab0d3debe50" scoped=""/>
+        <function-ref name="startPeriodicAt" ref="0x2ab0d3e19b78" scoped=""/>
+        <function-ref name="isOneShot" ref="0x2ab0d3e19728" scoped=""/>
+        <function-ref name="getdt" ref="0x2ab0d3e17088" scoped=""/>
+        <function-ref name="gett0" ref="0x2ab0d3e18bb8" scoped=""/>
+        <function-ref name="isRunning" ref="0x2ab0d3e192d8" scoped=""/>
+        <function-ref name="startPeriodic" ref="0x2ab0d3deb0c0" scoped=""/>
+        <function-ref name="startOneShotAt" ref="0x2ab0d3e18198" scoped=""/>
+        <function-ref name="startOneShot" ref="0x2ab0d3deb560" scoped=""/>
+        <function-ref name="stop" ref="0x2ab0d3deba00" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="52:BlinkC.nc" name="Timer0" provided="0" ref="0x2ab0d39b3dd0">
+      <component-ref nicename="BlinkC" qname="BlinkC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Timer0" ref="0x2ab0d39b3dd0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.timer.Timer" qname="Timer"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x2ab0d37eae88"/>
+            <typename><typedef-ref name="TMilli" ref="0x2ab0d39c0230"/></typename>
+          </type-tag>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="getNow" ref="0x2ab0d39ce0c0" scoped=""/>
+        <function-ref name="fired" ref="0x2ab0d39bc798" scoped=""/>
+        <function-ref name="startPeriodicAt" ref="0x2ab0d39b24d8" scoped=""/>
+        <function-ref name="isOneShot" ref="0x2ab0d39b2088" scoped=""/>
+        <function-ref name="getdt" ref="0x2ab0d39ce960" scoped=""/>
+        <function-ref name="gett0" ref="0x2ab0d39ce510" scoped=""/>
+        <function-ref name="isRunning" ref="0x2ab0d39bcbe8" scoped=""/>
+        <function-ref name="startPeriodic" ref="0x2ab0d39bd9e0" scoped=""/>
+        <function-ref name="startOneShotAt" ref="0x2ab0d39b2aa8" scoped=""/>
+        <function-ref name="startOneShot" ref="0x2ab0d39bde80" scoped=""/>
+        <function-ref name="stop" ref="0x2ab0d39bc348" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="57:/home/caio/Projects/wsn/tinyos-2.x/tos/system/MainC.nc" name="Boot" provided="1" ref="0x2ab0d37ff940">
+      <component-ref nicename="tos.system.MainC" qname="MainC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Boot" ref="0x2ab0d37ff940" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.interfaces.Boot" qname="Boot"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="booted" ref="0x2ab0d37ffc90" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="53:BlinkC.nc" name="Timer1" provided="0" ref="0x2ab0d39cd020">
+      <component-ref nicename="BlinkC" qname="BlinkC"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Timer1" ref="0x2ab0d39cd020" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.timer.Timer" qname="Timer"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x2ab0d37eae88"/>
+            <typename><typedef-ref name="TMilli" ref="0x2ab0d39c0230"/></typename>
+          </type-tag>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="getNow" ref="0x2ab0d39c92b8" scoped=""/>
+        <function-ref name="fired" ref="0x2ab0d39cc978" scoped=""/>
+        <function-ref name="startPeriodicAt" ref="0x2ab0d39cb6c8" scoped=""/>
+        <function-ref name="isOneShot" ref="0x2ab0d39cb278" scoped=""/>
+        <function-ref name="getdt" ref="0x2ab0d39c9b58" scoped=""/>
+        <function-ref name="gett0" ref="0x2ab0d39c9708" scoped=""/>
+        <function-ref name="isRunning" ref="0x2ab0d39ccdc8" scoped=""/>
+        <function-ref name="startPeriodic" ref="0x2ab0d39cdb68" scoped=""/>
+        <function-ref name="startOneShotAt" ref="0x2ab0d39cbc98" scoped=""/>
+        <function-ref name="startOneShot" ref="0x2ab0d39cc088" scoped=""/>
+        <function-ref name="stop" ref="0x2ab0d39cc528" scoped=""/>
+      </interface-functions>
+    </interface><interface loc="45:/home/caio/Projects/wsn/tinyos-2.x/tos/system/TimerMilliC.nc" name="Timer" provided="1" ref="0x2ab0d3c4ea60">
+      <component-ref nicename="tos.system.TimerMilliC" qname="BlinkAppC.Timer0"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Timer" ref="0x2ab0d3c4ea60" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.lib.timer.Timer" qname="Timer"/>
+        <arguments>
+          <type-tag alignment="I:2" size="I:2"><struct-ref ref="0x2ab0d37eae88"/>
+            <typename><typedef-ref name="TMilli" ref="0x2ab0d39c0230"/></typename>
+          </type-tag>
+        </arguments>
+      </instance>
+      <interface-functions>
+        <function-ref name="getNow" ref="0x2ab0d3df5d60" scoped=""/>
+        <function-ref name="fired" ref="0x2ab0d3df7470" scoped=""/>
+        <function-ref name="startPeriodicAt" ref="0x2ab0d3df51c0" scoped=""/>
+        <function-ref name="isOneShot" ref="0x2ab0d3df7d10" scoped=""/>
+        <function-ref name="getdt" ref="0x2ab0d3df4648" scoped=""/>
+        <function-ref name="gett0" ref="0x2ab0d3df41f8" scoped=""/>
+        <function-ref name="isRunning" ref="0x2ab0d3df78c0" scoped=""/>
+        <function-ref name="startPeriodic" ref="0x2ab0d3df8620" scoped=""/>
+        <function-ref name="startOneShotAt" ref="0x2ab0d3df5790" scoped=""/>
+        <function-ref name="startOneShot" ref="0x2ab0d3df8ac0" scoped=""/>
+        <function-ref name="stop" ref="0x2ab0d3df7020" scoped=""/>
+      </interface-functions>
+    </interface><component loc="56:/home/caio/Projects/wsn/tinyos-2.x/tos/system/MainC.nc" nicename="tos.system.MainC" qname="MainC">
+      <documentation loc="45:/home/caio/Projects/wsn/tinyos-2.x/tos/system/MainC.nc">
+        <short>
+ MainC is the system interface the TinyOS boot sequence.</short>
+        <long>
+ MainC is the system interface the TinyOS boot sequence. It wires the
+ boot sequence implementation to the scheduler and hardware resources.
+
+ @author Philip Levis
+ @date   August 6 2005
+ @see    TEP 107: Boot Sequence
+</long>
+      </documentation>
+      <configuration/>
+      <wiring>
+        <wire loc="72:/home/caio/Projects/wsn/tinyos-2.x/tos/system/MainC.nc">
+          <from><interface-ref name="Boot" ref="0x2ab0d37ff940" scoped=""/></from>
+          <to><interface-ref name="Boot" ref="0x2ab0d37fdc48" scoped=""/></to>
+        </wire>
+        <wire loc="67:/home/caio/Projects/wsn/tinyos-2.x/tos/system/MainC.nc">
+          <from><interface-ref name="Scheduler" ref="0x2ab0d399c308" scoped=""/></from>
+          <to><interface-ref name="Scheduler" ref="0x2ab0d34ff390" scoped=""/></to>
+        </wire>
+        <wire loc="68:/home/caio/Projects/wsn/tinyos-2.x/tos/system/MainC.nc">
+          <from><interface-ref name="PlatformInit" ref="0x2ab0d399cce0" scoped=""/></from>
+          <to><interface-ref name="Init" ref="0x2ab0d37e8c90" scoped=""/></to>
+        </wire>
+        <wire loc="71:/home/caio/Projects/wsn/tinyos-2.x/tos/system/MainC.nc">
+          <from><interface-ref name="SoftwareInit" ref="0x2ab0d39ad418" scoped=""/></from>
+          <to><interface-ref name="SoftwareInit" ref="0x2ab0d37e9d60" scoped=""/></to>
+        </wire>
+      </wiring>
+    </component><component loc="45:/home/caio/Projects/wsn/tinyos-2.x/tos/system/LedsC.nc" nicename="tos.system.LedsC" qname="LedsC">
+      <documentation loc="34:/home/caio/Projects/wsn/tinyos-2.x/tos/system/LedsC.nc">
+        <short>
+
+ The basic TinyOS LEDs abstraction.</short>
+        <long>
+
+ The basic TinyOS LEDs abstraction.
+
+ @author Phil Buonadonna
+ @author David Gay
+ @author Philip Levis
+ @author Joe Polastre
+</long>
+      </documentation>
+      <configuration/>
+      <wiring>
+        <wire loc="51:/home/caio/Projects/wsn/tinyos-2.x/tos/system/LedsC.nc">
+          <from><interface-ref name="Leds" ref="0x2ab0d39a4d00" scoped=""/></from>
+          <to><interface-ref name="Leds" ref="0x2ab0d39e65e8" scoped=""/></to>
+        </wire>
+        <wire loc="53:/home/caio/Projects/wsn/tinyos-2.x/tos/system/LedsC.nc">
+          <from><interface-ref name="Init" ref="0x2ab0d39fe460" scoped=""/></from>
+          <to><interface-ref name="Init" ref="0x2ab0d39e6020" scoped=""/></to>
+        </wire>
+        <wire loc="54:/home/caio/Projects/wsn/tinyos-2.x/tos/system/LedsC.nc">
+          <from><interface-ref name="Led0" ref="0x2ab0d39fd7c8" scoped=""/></from>
+          <to><interface-ref name="Led0" ref="0x2ab0d3a01020" scoped=""/></to>
+        </wire>
+        <wire loc="55:/home/caio/Projects/wsn/tinyos-2.x/tos/system/LedsC.nc">
+          <from><interface-ref name="Led1" ref="0x2ab0d39e4958" scoped=""/></from>
+          <to><interface-ref name="Led1" ref="0x2ab0d3a001b0" scoped=""/></to>
+        </wire>
+        <wire loc="56:/home/caio/Projects/wsn/tinyos-2.x/tos/system/LedsC.nc">
+          <from><interface-ref name="Led2" ref="0x2ab0d39e3ae0" scoped=""/></from>
+          <to><interface-ref name="Led2" ref="0x2ab0d39ff378" scoped=""/></to>
+        </wire>
+      </wiring>
+    </component><component loc="44(BlinkAppC.Timer0):/home/caio/Projects/wsn/tinyos-2.x/tos/system/TimerMilliC.nc" nicename="tos.system.TimerMilliC" qname="BlinkAppC.Timer0">
+      <documentation loc="33:/home/caio/Projects/wsn/tinyos-2.x/tos/system/TimerMilliC.nc">
+        <short>
+ The virtualized millisecond timer abstraction.</short>
+        <long>
+ The virtualized millisecond timer abstraction. Instantiating this 
+ component gives an independent millisecond granularity timer.
+
+ @author Philip Levis
+ @date   January 16 2006
+ @see    TEP 102: Timers
+</long>
+      </documentation>
+      <instance number="0">
+        <component-ref nicename="tos.system.TimerMilliC" qname="TimerMilliC"/>
+      </instance>
+      <configuration/>
+      <wiring>
+        <wire loc="52:/home/caio/Projects/wsn/tinyos-2.x/tos/system/TimerMilliC.nc">
+          <from><interface-ref name="Timer" ref="0x2ab0d3c4ea60" scoped=""/></from>
+          <to><interface-ref name="TimerMilli" ref="0x2ab0d3c6d6a0" scoped=""/>
+          <arguments>
+            <value cst="I:0">
+              <type-int alignment="I:2" cname="unsigned int" size="I:2" unsigned=""/>
+            </value>
+          </arguments>
+          </to>
+        </wire>
+      </wiring>
+    </component><component loc="44(BlinkAppC.Timer2):/home/caio/Projects/wsn/tinyos-2.x/tos/system/TimerMilliC.nc" nicename="tos.system.TimerMilliC" qname="BlinkAppC.Timer2">
+      <documentation loc="33:/home/caio/Projects/wsn/tinyos-2.x/tos/system/TimerMilliC.nc">
+        <short>
+ The virtualized millisecond timer abstraction.</short>
+        <long>
+ The virtualized millisecond timer abstraction. Instantiating this 
+ component gives an independent millisecond granularity timer.
+
+ @author Philip Levis
+ @date   January 16 2006
+ @see    TEP 102: Timers
+</long>
+      </documentation>
+      <instance number="2">
+        <component-ref nicename="tos.system.TimerMilliC" qname="TimerMilliC"/>
+      </instance>
+      <configuration/>
+      <wiring>
+        <wire loc="52:/home/caio/Projects/wsn/tinyos-2.x/tos/system/TimerMilliC.nc">
+          <from><interface-ref name="Timer" ref="0x2ab0d3dec550" scoped=""/></from>
+          <to><interface-ref name="TimerMilli" ref="0x2ab0d3c6d6a0" scoped=""/>
+          <arguments>
+            <value cst="I:2">
+              <type-int alignment="I:2" cname="unsigned int" size="I:2" unsigned=""/>
+            </value>
+          </arguments>
+          </to>
+        </wire>
+      </wiring>
+    </component><component loc="44(BlinkAppC.Timer1):/home/caio/Projects/wsn/tinyos-2.x/tos/system/TimerMilliC.nc" nicename="tos.system.TimerMilliC" qname="BlinkAppC.Timer1">
+      <documentation loc="33:/home/caio/Projects/wsn/tinyos-2.x/tos/system/TimerMilliC.nc">
+        <short>
+ The virtualized millisecond timer abstraction.</short>
+        <long>
+ The virtualized millisecond timer abstraction. Instantiating this 
+ component gives an independent millisecond granularity timer.
+
+ @author Philip Levis
+ @date   January 16 2006
+ @see    TEP 102: Timers
+</long>
+      </documentation>
+      <instance number="1">
+        <component-ref nicename="tos.system.TimerMilliC" qname="TimerMilliC"/>
+      </instance>
+      <configuration/>
+      <wiring>
+        <wire loc="52:/home/caio/Projects/wsn/tinyos-2.x/tos/system/TimerMilliC.nc">
+          <from><interface-ref name="Timer" ref="0x2ab0d3df2020" scoped=""/></from>
+          <to><interface-ref name="TimerMilli" ref="0x2ab0d3c6d6a0" scoped=""/>
+          <arguments>
+            <value cst="I:1">
+              <type-int alignment="I:2" cname="unsigned int" size="I:2" unsigned=""/>
+            </value>
+          </arguments>
+          </to>
+        </wire>
+      </wiring>
+    </component><component loc="50:BlinkC.nc" nicename="BlinkC" qname="BlinkC" safe="">
+      <module/>
+    </component></referenced></component>

@@ -1,0 +1,27 @@
+<?xml version="1.0" ?><component loc="38:/home/caio/Projects/wsn/tinyos-2.x/tos/platforms/pipe1611/hardware/clock/MoteClockP.nc" nicename="tos.platforms.pipe1611.hardware.clock.MoteClockP" qname="MoteClockP">
+      <documentation loc="33:/home/caio/Projects/wsn/tinyos-2.x/tos/platforms/pipe1611/hardware/clock/MoteClockP.nc">
+        <short>
+ </short>
+        <long>
+ @author Vlado Handziski &lt;handzisk@tkn.tu-berlind.de&gt;
+ @author Cory Sharp &lt;cssharp@eecs.berkeley.edu&gt;
+</long>
+      </documentation>
+      <module/>
+    <specification><interface loc="39:/home/caio/Projects/wsn/tinyos-2.x/tos/platforms/pipe1611/hardware/clock/MoteClockP.nc" name="Msp430ClockInit" provided="0" ref="0x2ab0d3814ac0">
+      <component-ref nicename="tos.platforms.pipe1611.hardware.clock.MoteClockP" qname="MoteClockP"/>
+      <type-interface alignment="I:2" size="I:2"><interface-ref name="Msp430ClockInit" ref="0x2ab0d3814ac0" scoped=""/></type-interface>
+      <instance>
+        <interfacedef-ref nicename="tos.chips.msp430.Msp430ClockInit" qname="Msp430ClockInit"/>
+      </instance>
+      <interface-functions>
+        <function-ref name="defaultInitClocks" ref="0x2ab0d399b950" scoped=""/>
+        <function-ref name="initTimerB" ref="0x2ab0d399b020" scoped=""/>
+        <function-ref name="defaultInitTimerA" ref="0x2ab0d399b1a8" scoped=""/>
+        <function-ref name="initTimerA" ref="0x2ab0d399b330" scoped=""/>
+        <function-ref name="defaultInitTimerB" ref="0x2ab0d3814e10" scoped=""/>
+        <function-ref name="defaultSetupDcoCalibrate" ref="0x2ab0d399b4b8" scoped=""/>
+        <function-ref name="setupDcoCalibrate" ref="0x2ab0d399b640" scoped=""/>
+        <function-ref name="initClocks" ref="0x2ab0d399b7c8" scoped=""/>
+      </interface-functions>
+    </interface></specification><referenced/></component>

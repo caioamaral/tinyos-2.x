@@ -1,5 +1,6 @@
-/*
- * Copyright (c) 2009-2010 People Power Co.
+// $Id: PlatformLedsC.nc,v 1.5 2010-06-29 22:07:55 scipio Exp $
+
+/* Copyright (c) 2000-2005 The Regents of the University of California.  
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -8,13 +9,11 @@
  *
  * - Redistributions of source code must retain the above copyright
  *   notice, this list of conditions and the following disclaimer.
- *
  * - Redistributions in binary form must reproduce the above copyright
  *   notice, this list of conditions and the following disclaimer in the
  *   documentation and/or other materials provided with the
  *   distribution.
- *
- * - Neither the name of the copyright holders nor the names of
+ * - Neither the name of the copyright holder nor the names of
  *   its contributors may be used to endorse or promote products derived
  *   from this software without specific prior written permission.
  *
@@ -30,38 +29,40 @@
  * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
  * OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * @author Peter A. Bigot <pab@peoplepowerco.com>
- * @author Caio Amaral <eng.caioamaral@gmail.com> (Edit only)
  */
 
+/**
+ * @author Joe Polastre
+ * @version $Revision: 1.5 $ $Date: 2010-06-29 22:07:55 $
+ */
 #include "hardware.h"
 
 configuration PlatformLedsC {
-  provides {
-    interface Init;
-    interface Leds;
-  }
+  provides interface GeneralIO as Led0;
+  provides interface GeneralIO as Led1;
+  provides interface GeneralIO as Led2;
+  uses interface Init;
 }
-implementation {
-  components PlatformLedsP;
-  Leds = PlatformLedsP;
-  Init = PlatformLedsP;
+implementation
+{
+  components 
+      HplMsp430GeneralIOC as GeneralIOC
+    , new Msp430GpioC() as Led0Impl
+    , new Msp430GpioC() as Led1Impl
+    , new Msp430GpioC() as Led2Impl
+    ;
+  components PlatformP;
 
-  components HplMsp430GeneralIOC as GeneralIOC;
+  Init = PlatformP.LedsInit;
 
-  /* RED LED (D1) at P6.0 */
-  components new Msp430GpioC() as Led0Impl;
-  Led0Impl -> GeneralIOC.Port10;
-  PlatformLedsP.Led0 -> Led0Impl;
+  Led0 = Led0Impl;
+  Led0Impl -> GeneralIOC.Port60;
 
-  /* Yellow LED (D2) at P4.1 */
-  components new Msp430GpioC() as Led1Impl;
-  Led1Impl -> GeneralIOC.Port11;
-  PlatformLedsP.Led1 -> Led1Impl;
+  Led1 = Led1Impl;
+  Led1Impl -> GeneralIOC.Port54;
 
- /* Green LED (D1) at P4.0 */
-  components new Msp430GpioC() as Led2Impl;
-  Led2Impl -> GeneralIOC.Port45;
-  PlatformLedsP.Led2 -> Led2Impl;
+  Led2 = Led2Impl;
+  Led2Impl -> GeneralIOC.Port55;
+
 }
+

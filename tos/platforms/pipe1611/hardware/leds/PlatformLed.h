@@ -1,5 +1,4 @@
-/**
- * Copyright (c) 2007 Arch Rock Corporation
+/* Copyright (c) 2010 People Power Co.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -11,7 +10,7 @@
  *   notice, this list of conditions and the following disclaimer in the
  *   documentation and/or other materials provided with the
  *   distribution.
- * - Neither the name of the Arch Rock Corporation nor the names of
+ * - Neither the name of the People Power Corporation nor the names of
  *   its contributors may be used to endorse or promote products derived
  *   from this software without specific prior written permission.
  *
@@ -19,7 +18,7 @@
  * ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
  * FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE
- * ARCHED ROCK OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+ * PEOPLE POWER CO. OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
  * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
  * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
@@ -27,65 +26,25 @@
  * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
  * OF THE POSSIBILITY OF SUCH DAMAGE
- */
-
-/**
- * Generic layer to translate a GIO into a toggle switch
  *
- * @author Gilman Tolle <gtolle@archrock.com>
- * @version $Revision: 1.1 $
  */
 
-#include <UserButton.h>
+#ifndef _PLATFORM_TMOTE_LED_H_
+#define _PLATFORM_TMOTE_LED_H_
 
-generic module SwitchToggleC() {
-  provides interface Get<bool>;
-  provides interface Notify<bool>;
+/** Constants used in the generic LedC module to determine how many
+ * named Led interfaces should be published.  The value should match
+ * the size of the table in PlatformLedsP, but we're not going to
+ * guess that table's public name. */
+#define PLATFORM_LED_COUNT 3
 
-  uses interface GeneralIO;
-  uses interface GpioInterrupt;
-}
-implementation {
-  norace bool m_pinHigh;
+/** Map to the LED index for the red LED */
+#define PLATFORM_LED_RED 0
 
-  task void sendEvent();
+/** Map to the LED index for the green LED */
+#define PLATFORM_LED_GREEN 1
 
-  command bool Get.get() { return call GeneralIO.get(); }
+/** Map to the LED index for the blue LED */
+#define PLATFORM_LED_BLUE 2
 
-  command error_t Notify.enable() {
-    call GeneralIO.makeInput();
-
-    if ( call GeneralIO.get() ) {
-      m_pinHigh = TRUE;
-      return call GpioInterrupt.enableFallingEdge();
-    } else {
-      m_pinHigh = FALSE;
-      return call GpioInterrupt.enableRisingEdge();
-    }
-  }
-
-  command error_t Notify.disable() {
-    return call GpioInterrupt.disable();
-  }
-
-  async event void GpioInterrupt.fired() {
-    call GpioInterrupt.disable();
-
-    m_pinHigh = !m_pinHigh;
-
-    post sendEvent();
-  }
-
-  task void sendEvent() {
-    bool pinHigh;
-    pinHigh = m_pinHigh;
-    
-    signal Notify.notify( pinHigh );
-    
-    if ( pinHigh ) {
-      call GpioInterrupt.enableFallingEdge();
-    } else {
-      call GpioInterrupt.enableRisingEdge();
-    }
-  }
-}
+#endif // _PLATFORM_TMOTE_LED_H_

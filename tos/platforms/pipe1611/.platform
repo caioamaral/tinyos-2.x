@@ -5,8 +5,17 @@
 
 push( @includes, qw(
 
+  %P/hardware/adc
+  %P/hardware/buttons
+  %P/hardware/clock
+  %P/hardware/leds
+  %P/hardware/sensor
+  %P/hardware/timer
+  %P/hardware/uart
+
+
   %T/platforms/pipe1611
-  %T/platforms/telosa
+#  %T/platforms/telosa
   %T/platforms/telosa/chips/cc2420
   %T/chips/cc2420
   %T/chips/cc2420/alarm
@@ -22,6 +31,7 @@ push( @includes, qw(
   %T/chips/cc2420/transmit
   %T/chips/cc2420/unique
   %T/chips/cc2420/security
+
   %T/chips/msp430/x1x2/timer
   %T/chips/msp430/x1xxx
   %T/chips/msp430
@@ -32,6 +42,7 @@ push( @includes, qw(
   %T/chips/msp430/timer
   %T/chips/msp430/usart
   %T/chips/msp430/sensors
+
   %T/lib/timer
   %T/lib/serial
   %T/lib/adc

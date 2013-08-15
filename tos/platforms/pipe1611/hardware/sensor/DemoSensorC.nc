@@ -1,5 +1,5 @@
-/**
- * Copyright (c) 2007 Arch Rock Corporation
+/*
+ * Copyright (c) 2005-2006 Arch Rock Corporation
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -29,63 +29,29 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE
  */
 
-/**
- * Generic layer to translate a GIO into a toggle switch
+/** 
+ * DemoSensorC is a generic sensor device that provides a 16-bit
+ * value. The platform author chooses which sensor actually sits
+ * behind DemoSensorC, and though it's probably Voltage, Light, or
+ * Temperature, there are no guarantees.
+ *
+ * This particular DemoSensorC on the telosb platform provides a
+ * voltage reading, using VoltageC. 
+ *
+ * To convert from ADC counts to actual voltage, divide this reading
+ * by 4096 and multiply by 3.
  *
  * @author Gilman Tolle <gtolle@archrock.com>
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.4 $ $Date: 2006-12-12 18:23:45 $
+ * 
  */
 
-#include <UserButton.h>
-
-generic module SwitchToggleC() {
-  provides interface Get<bool>;
-  provides interface Notify<bool>;
-
-  uses interface GeneralIO;
-  uses interface GpioInterrupt;
+generic configuration DemoSensorC()
+{
+  provides interface Read<uint16_t>;
 }
-implementation {
-  norace bool m_pinHigh;
-
-  task void sendEvent();
-
-  command bool Get.get() { return call GeneralIO.get(); }
-
-  command error_t Notify.enable() {
-    call GeneralIO.makeInput();
-
-    if ( call GeneralIO.get() ) {
-      m_pinHigh = TRUE;
-      return call GpioInterrupt.enableFallingEdge();
-    } else {
-      m_pinHigh = FALSE;
-      return call GpioInterrupt.enableRisingEdge();
-    }
-  }
-
-  command error_t Notify.disable() {
-    return call GpioInterrupt.disable();
-  }
-
-  async event void GpioInterrupt.fired() {
-    call GpioInterrupt.disable();
-
-    m_pinHigh = !m_pinHigh;
-
-    post sendEvent();
-  }
-
-  task void sendEvent() {
-    bool pinHigh;
-    pinHigh = m_pinHigh;
-    
-    signal Notify.notify( pinHigh );
-    
-    if ( pinHigh ) {
-      call GpioInterrupt.enableFallingEdge();
-    } else {
-      call GpioInterrupt.enableRisingEdge();
-    }
-  }
+implementation
+{
+  components new VoltageC() as DemoSensor;
+  Read = DemoSensor;
 }

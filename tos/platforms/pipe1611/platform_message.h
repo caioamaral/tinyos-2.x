@@ -1,6 +1,5 @@
-// $Id: PlatformLedsC.nc,v 1.5 2010-06-29 22:07:55 scipio Exp $
-
-/* Copyright (c) 2000-2005 The Regents of the University of California.  
+/* $Id: platform_message.h,v 1.6 2010-06-29 22:07:55 scipio Exp $
+ * Copyright (c) 2005 The Regents of the University  of California.  
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -13,7 +12,7 @@
  *   notice, this list of conditions and the following disclaimer in the
  *   documentation and/or other materials provided with the
  *   distribution.
- * - Neither the name of the copyright holder nor the names of
+ * - Neither the name of the University of California nor the names of
  *   its contributors may be used to endorse or promote products derived
  *   from this software without specific prior written permission.
  *
@@ -29,40 +28,43 @@
  * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
  * OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * Copyright (c) 2002-2005 Intel Corporation
+ * All rights reserved.
+ *
+ * This file is distributed under the terms in the attached INTEL-LICENSE     
+ * file. If you do not find these files, copies can be found by writing to
+ * Intel Research Berkeley, 2150 Shattuck Avenue, Suite 1300, Berkeley, CA, 
+ * 94704.  Attention:  Intel License Inquiry.
  */
 
 /**
- * @author Joe Polastre
- * @version $Revision: 1.5 $ $Date: 2010-06-29 22:07:55 $
+ * Defining the platform-independently named packet structures to be the
+ * chip-specific CC1000 packet structures.
+ *
+ * @author Philip Levis
+ * @version $Revision: 1.6 $ $Date: 2010-06-29 22:07:55 $
  */
-#include "hardware.h"
 
-configuration PlatformLedsC {
-  provides interface GeneralIO as Led0;
-  provides interface GeneralIO as Led1;
-  provides interface GeneralIO as Led2;
-  uses interface Init;
-}
-implementation
-{
-  components 
-      HplMsp430GeneralIOC as GeneralIOC
-    , new Msp430GpioC() as Led0Impl
-    , new Msp430GpioC() as Led1Impl
-    , new Msp430GpioC() as Led2Impl
-    ;
-  components PlatformP;
 
-  Init = PlatformP.LedsInit;
+#ifndef PLATFORM_MESSAGE_H
+#define PLATFORM_MESSAGE_H
 
-  Led0 = Led0Impl;
-  Led0Impl -> GeneralIOC.Port60;
+#include <CC2420.h>
+#include <Serial.h>
 
-  Led1 = Led1Impl;
-  Led1Impl -> GeneralIOC.Port54;
+typedef union message_header {
+  cc2420_header_t cc2420;
+  serial_header_t serial;
+} message_header_t;
 
-  Led2 = Led2Impl;
-  Led2Impl -> GeneralIOC.Port55;
+typedef union TOSRadioFooter {
+  cc2420_footer_t cc2420;
+} message_footer_t;
 
-}
+typedef union TOSRadioMetadata {
+  cc2420_metadata_t cc2420;
+  serial_metadata_t serial;
+} message_metadata_t;
 
+#endif

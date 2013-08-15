@@ -1,7 +1,6 @@
-// $Id: PlatformLedsC.nc,v 1.5 2010-06-29 22:07:55 scipio Exp $
-
-/* Copyright (c) 2000-2005 The Regents of the University of California.  
- * All rights reserved.
+/*
+ * Copyright (c) 2008 The Regents of the University  of California.
+ * All rights reserved."
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -13,7 +12,7 @@
  *   notice, this list of conditions and the following disclaimer in the
  *   documentation and/or other materials provided with the
  *   distribution.
- * - Neither the name of the copyright holder nor the names of
+ * - Neither the name of the copyright holders nor the names of
  *   its contributors may be used to endorse or promote products derived
  *   from this software without specific prior written permission.
  *
@@ -29,40 +28,44 @@
  * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
  * OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
  */
+
 
 /**
- * @author Joe Polastre
- * @version $Revision: 1.5 $ $Date: 2010-06-29 22:07:55 $
+ *
+ * @author Stephen Dawson-Haggerty
  */
-#include "hardware.h"
+ 
+configuration Ieee154MessageC  {
+  provides {
+    interface SplitControl;
 
-configuration PlatformLedsC {
-  provides interface GeneralIO as Led0;
-  provides interface GeneralIO as Led1;
-  provides interface GeneralIO as Led2;
-  uses interface Init;
+    interface Resource as SendResource[uint8_t clientId];
+    interface Ieee154Send;
+    interface Receive as Ieee154Receive;
+
+    interface Ieee154Packet;
+    interface Packet;
+
+    interface PacketAcknowledgements;
+    interface LinkPacketMetadata;
+    interface LowPowerListening;
+    interface PacketLink;
+  }
+
+} implementation {
+  components CC2420Ieee154MessageC as Msg;
+
+  SplitControl = Msg;
+  SendResource = Msg;
+  Ieee154Send  = Msg;
+  Ieee154Receive = Msg;
+  Ieee154Packet = Msg;
+  Packet = Msg;
+  
+  PacketAcknowledgements = Msg;
+  LinkPacketMetadata = Msg;
+  LowPowerListening = Msg;
+  PacketLink = Msg;
 }
-implementation
-{
-  components 
-      HplMsp430GeneralIOC as GeneralIOC
-    , new Msp430GpioC() as Led0Impl
-    , new Msp430GpioC() as Led1Impl
-    , new Msp430GpioC() as Led2Impl
-    ;
-  components PlatformP;
-
-  Init = PlatformP.LedsInit;
-
-  Led0 = Led0Impl;
-  Led0Impl -> GeneralIOC.Port60;
-
-  Led1 = Led1Impl;
-  Led1Impl -> GeneralIOC.Port54;
-
-  Led2 = Led2Impl;
-  Led2Impl -> GeneralIOC.Port55;
-
-}
-

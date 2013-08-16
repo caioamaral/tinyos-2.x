@@ -47,9 +47,9 @@ implementation {
   components HplMsp430GeneralIOC as GeneralIOC;
   components HplMsp430InterruptC as InterruptC;
 
-  HplMsp430GeneralIO = GeneralIOC.Port17;
+  HplMsp430GeneralIO = GeneralIOC.Port10;
 
   components new Msp430InterruptC() as InterruptUserButtonC;
-  InterruptUserButtonC.HplInterrupt -> InterruptC.Port17;
+  InterruptUserButtonC.HplInterrupt -> InterruptC.Port10;
   GpioInterrupt = InterruptUserButtonC.Interrupt;
 }

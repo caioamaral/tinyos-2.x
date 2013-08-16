@@ -1,0 +1,9 @@
+#-*-Makefile-*- vim:syntax=make
+
+PLATFORM = pipe5510
+MSP_MCU = msp430f55510
+
+$(call TOSMake_include_platform,msp)
+
+pipe5510: $(BUILD_DEPS)
+        @:

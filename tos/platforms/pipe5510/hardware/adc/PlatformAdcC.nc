@@ -40,10 +40,8 @@ configuration PlatformAdcC {
     interface HplMsp430GeneralIO as A1;
     interface HplMsp430GeneralIO as A2;
     interface HplMsp430GeneralIO as A3;
-    interface HplMsp430GeneralIO as A4;
-    interface HplMsp430GeneralIO as A5;
-    interface HplMsp430GeneralIO as A6;
-    interface HplMsp430GeneralIO as A7;
+    interface HplMsp430GeneralIO as A8;
+    interface HplMsp430GeneralIO as A9;
 
     interface Msp430Timer as TimerA;
     interface Msp430TimerControl as ControlA0;
@@ -56,14 +54,12 @@ configuration PlatformAdcC {
 implementation {
 
   components HplMsp430GeneralIOC;
-  A0 = HplMsp430GeneralIOC.Port20;
-  A1 = HplMsp430GeneralIOC.Port21;
-  A2 = HplMsp430GeneralIOC.Port22;
-  A3 = HplMsp430GeneralIOC.Port23;
-  A4 = HplMsp430GeneralIOC.Port24;
-  A5 = HplMsp430GeneralIOC.Port25;
-  A6 = HplMsp430GeneralIOC.Port26;
-  A7 = HplMsp430GeneralIOC.Port27;
+  A0 = HplMsp430GeneralIOC.Port60;
+  A1 = HplMsp430GeneralIOC.Port61;
+  A2 = HplMsp430GeneralIOC.Port62;
+  A3 = HplMsp430GeneralIOC.Port63;
+  A8 = HplMsp430GeneralIOC.Port50;
+  A9 = HplMsp430GeneralIOC.Port51;
 
   components Msp430TimerC;
   TimerA = Msp430TimerC.Timer0_A;

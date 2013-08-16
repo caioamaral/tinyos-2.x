@@ -5,7 +5,7 @@
 
 for (split(/\n/, <<'EOText'
 
-#  %P/hardware/adc
+  %P/hardware/adc
   %P/hardware/buttons
   %P/hardware/clock
   %P/hardware/leds

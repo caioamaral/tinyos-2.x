@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2009-2010 People Power Co.
+* Copyright (c) 2009-2010 People Power Co.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -57,9 +57,9 @@ enum {
 #endif /* PLATFORM_MSP430_HAS_XT1 */
 
 // LEDs
-TOSH_ASSIGN_PIN(RED_LED, 1, 0);
-TOSH_ASSIGN_PIN(GREEN_LED, 1, 1);
-TOSH_ASSIGN_PIN(YELLOW_LED, 4, 6);
+TOSH_ASSIGN_PIN(RED_LED, 4, 7);
+TOSH_ASSIGN_PIN(GREEN_LED, 1, 0);
+TOSH_ASSIGN_PIN(YELLOW_LED, 1, 1);
 
 // CC2420 RADIO #defines
 TOSH_ASSIGN_PIN(RADIO_CSN, 3, 0);

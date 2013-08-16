@@ -44,18 +44,12 @@ configuration PlatformUsciMapC {
 } implementation {
   components HplMsp430GeneralIOC as GIO;
 
-  components Msp430UsciUartA0P as UartA0C;
-  UartA0C.URXD -> GIO.UCA0RXD;
-  UartA0C.UTXD -> GIO.UCA0TXD;
-
-  components Msp430UsciSpiB0P as SpiB0C;
-  SpiB0C.SIMO -> GIO.UCB0SIMO;
-  SpiB0C.SOMI -> GIO.UCB0SOMI;
-  SpiB0C.CLK  -> GIO.UCB0CLK;
+  components Msp430UsciUartA1P as UartA1C;
+  UartA1C.URXD -> GIO.UCA1RXD;
+  UartA1C.UTXD -> GIO.UCA1TXD;
 
   components Msp430UsciSpiB1P as SpiB1C;
   SpiB1C.SIMO -> GIO.UCB1SIMO;
   SpiB1C.SOMI -> GIO.UCB1SOMI;
   SpiB1C.CLK  -> GIO.UCB1CLK;
- 
 }

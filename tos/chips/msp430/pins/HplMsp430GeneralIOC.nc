@@ -456,10 +456,10 @@ configuration HplMsp430GeneralIOC {
 
 
 /*
- * x5 family: msp430f55{10,09,08}
+ * x5 family: msp430f551{10,09,08}
  * in particular 5510
  */
-#if defined(__msp430x55x)
+#if defined(__MSP430F5510) || defined(__MSP430F5509) || defined(__MSP430F5508)
   provides interface HplMsp430GeneralIO as TA0CCR0;
   provides interface HplMsp430GeneralIO as TA0CCR1;
   provides interface HplMsp430GeneralIO as TA0CCR2;
@@ -498,7 +498,7 @@ configuration HplMsp430GeneralIOC {
   provides interface HplMsp430GeneralIO as ADC8;
   provides interface HplMsp430GeneralIO as ADC9;
 
-#endif /* msp430x55x */
+#endif /* __MSP430F5510 || __MSP430F5509 || __MSP430F5508 */
 
 
 
@@ -1150,7 +1150,7 @@ implementation {
 #endif	/* __msp430x54x || __msp430x54xA */
 
 
-#if defined(__msp430x55x)
+#if defined(__MSP430F5510) || defined(__MSP430F5509) || defined(__MSP430F5508)
 
    TA0CCR0 = P11;
    TA0CCR1 = P12;
@@ -1189,6 +1189,6 @@ implementation {
    ADC8 = P50;
    ADC9 = P51;
 
-#endif	/* __msp430x55x */
+#endif	/* __MSP430F5510 || __MSP430F5509 || __MSP430F5508 */
 
 }

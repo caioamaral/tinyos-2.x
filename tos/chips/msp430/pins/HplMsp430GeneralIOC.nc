@@ -453,6 +453,57 @@ configuration HplMsp430GeneralIOC {
 
 #endif /* msp430x54x || msp430x54xA */
 
+
+
+/*
+ * x5 family: msp430f55{10,09,08}
+ * in particular 5510
+ */
+#if defined(__msp430x55x)
+  provides interface HplMsp430GeneralIO as TA0CCR0;
+  provides interface HplMsp430GeneralIO as TA0CCR1;
+  provides interface HplMsp430GeneralIO as TA0CCR2;
+  provides interface HplMsp430GeneralIO as TA0CCR3;
+  provides interface HplMsp430GeneralIO as TA0CCR4;
+  provides interface HplMsp430GeneralIO as TA0CLK;
+
+  provides interface HplMsp430GeneralIO as TA1CCR0;
+  provides interface HplMsp430GeneralIO as TA1CCR1;
+  provides interface HplMsp430GeneralIO as TA1CLK;
+
+  provides interface HplMsp430GeneralIO as ACLK;
+
+  provides interface HplMsp430GeneralIO as UCA1CLK;
+  provides interface HplMsp430GeneralIO as UCA1STE;
+  provides interface HplMsp430GeneralIO as UCA1TXD;
+  provides interface HplMsp430GeneralIO as UCA1RXD;
+  provides interface HplMsp430GeneralIO as UCA1SIMO;
+  provides interface HplMsp430GeneralIO as UCA1SOMI;
+
+  provides interface HplMsp430GeneralIO as UCB1CLK;
+  provides interface HplMsp430GeneralIO as UCB1STE;
+  provides interface HplMsp430GeneralIO as UCB1SIMO;
+  provides interface HplMsp430GeneralIO as UCB1SOMI;
+  provides interface HplMsp430GeneralIO as UCB1SDA;
+  provides interface HplMsp430GeneralIO as UCB1SCL;
+
+  provides interface HplMsp430GeneralIO as ADC0;
+  provides interface HplMsp430GeneralIO as ADC1;
+  provides interface HplMsp430GeneralIO as ADC2;
+  provides interface HplMsp430GeneralIO as ADC3;
+
+// A8 and A9 can either be external inputs or connected to Vref/Veref
+// Check your chip for more details.
+
+  provides interface HplMsp430GeneralIO as ADC8;
+  provides interface HplMsp430GeneralIO as ADC9;
+
+#endif /* msp430x55x */
+
+
+
+
+
 }
 implementation {
   components 
@@ -1097,4 +1148,47 @@ implementation {
 #endif
 
 #endif	/* __msp430x54x || __msp430x54xA */
+
+
+#if defined(__msp430x55x)
+
+   TA0CCR0 = P11;
+   TA0CCR1 = P12;
+   TA0CCR2 = P13;
+   TA0CCR3 = P14;
+   TA0CCR4 = P15;
+   TA0CLK = P10;
+
+   TA1CCR0 = P17;
+   TA1CCR1 = P20;
+   TA1CLK = P16;
+
+   ACLK = P10;
+
+   UCA1TXD = P44;
+   UCA1RXD = P45;
+   UCA1SIMO = P44;
+   UCA1SOMI = P45;
+   UCA1CLK = P40;
+   UCA1STE = P43;
+
+   UCB1STE = P40;
+   UCB1SIMO = P41;
+   UCB1SOMI = P42;
+   UCB1SDA = P41;
+   UCB1SCL = P42;
+   UCB1CLK = P43;
+
+
+
+   ADC0 = P60;
+   ADC1 = P61;
+   ADC2 = P62;
+   ADC3 = P63;
+
+   ADC8 = P50;
+   ADC9 = P51;
+
+#endif	/* __msp430x55x */
+
 }

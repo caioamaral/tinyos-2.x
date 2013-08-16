@@ -11,6 +11,7 @@ for (split(/\n/, <<'EOText'
   %P/hardware/leds
   %P/hardware/pins
   %P/hardware/usci
+  %P/chips/cc2520
 
   %T/chips/msp430/x5xxx
   %T/chips/msp430/x5xxx/lpm
@@ -23,8 +24,8 @@ for (split(/\n/, <<'EOText'
   %T/chips/msp430/pmm
   %T/chips/msp430/adc12
 
-#  %T/chips/tmp112
-#  %T/chips/lis3dh
+
+  %T/chips/cc2520
 
   %T/lib/timer
   %T/lib/serial

@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2009-2010 People Power Co.
+ * Copyright (c) 2007, Vanderbilt University
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -8,13 +8,11 @@
  *
  * - Redistributions of source code must retain the above copyright
  *   notice, this list of conditions and the following disclaimer.
- *
  * - Redistributions in binary form must reproduce the above copyright
  *   notice, this list of conditions and the following disclaimer in the
  *   documentation and/or other materials provided with the
  *   distribution.
- *
- * - Neither the name of the copyright holders nor the names of
+ * - Neither the name of the copyright holder nor the names of
  *   its contributors may be used to endorse or promote products derived
  *   from this software without specific prior written permission.
  *
@@ -31,51 +29,86 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * @author Peter Bigot
+ * Author: Miklos Maroti
  */
 
-#ifndef _H_hardware_h
-#define _H_hardware_h
+#include <Tasklet.h>
+#include <RadioAssert.h>
 
-#include "msp430hardware.h"
+generic module CsmaLayerP()
+{
+	provides
+	{
+		interface RadioSend;
+	}
 
-// enum so components can override power saving,
-// as per TEP 112.
-enum {
-  TOS_SLEEP_NONE = MSP430_POWER_ACTIVE,
-};
+	uses
+	{
+		interface CsmaConfig as Config;
 
-/* Use the PlatformAdcC component, and enable 8 pins */
-//#define ADC12_USE_PLATFORM_ADC 1
-//#define ADC12_PIN_AUTO_CONFIGURE 1
-//#define ADC12_PINS_AVAILABLE 8
+		interface RadioSend as SubSend;
+		interface RadioCCA as SubCCA;
+	}
+}
 
-/* @TODO@ Disable probe for XT1 support until the anomaly observed in
- * apps/bootstrap/LocalTime is resolved. */
-#ifndef PLATFORM_MSP430_HAS_XT1
-#define PLATFORM_MSP430_HAS_XT1 1
-#endif /* PLATFORM_MSP430_HAS_XT1 */
+implementation
+{
+	tasklet_norace message_t *txMsg;
 
-// LEDs
-TOSH_ASSIGN_PIN(RED_LED, 4, 7);
-TOSH_ASSIGN_PIN(GREEN_LED, 1, 1);
-TOSH_ASSIGN_PIN(YELLOW_LED, 1, 2);
+	tasklet_norace uint8_t state;
+	enum
+	{
+		STATE_READY = 0,
+		STATE_CCA_WAIT = 1,
+		STATE_SEND = 2,
+	};
 
-// CC2420 RADIO #defines
-TOSH_ASSIGN_PIN(RADIO_CSN, 4, 0);
-TOSH_ASSIGN_PIN(RADIO_VREF, 1, 7);
-TOSH_ASSIGN_PIN(RADIO_RESET, 1, 1);
-TOSH_ASSIGN_PIN(RADIO_FIFOP, 1, 5);
-TOSH_ASSIGN_PIN(RADIO_SFD, 1, 2);
-TOSH_ASSIGN_PIN(RADIO_GIO0, 1, 3);
-TOSH_ASSIGN_PIN(RADIO_FIFO, 1, 4);
-TOSH_ASSIGN_PIN(RADIO_GIO1, 1, 4);
-TOSH_ASSIGN_PIN(RADIO_CCA, 1, 6);
+	tasklet_async event void SubSend.ready()
+	{
+		if( state == STATE_READY )
+			signal RadioSend.ready();
+	}
 
-TOSH_ASSIGN_PIN(CC_FIFOP, 1, 5);
-TOSH_ASSIGN_PIN(CC_FIFO, 1, 4);
-TOSH_ASSIGN_PIN(CC_SFD, 1, 2);
-TOSH_ASSIGN_PIN(CC_VREN, 1, 7);
-TOSH_ASSIGN_PIN(CC_RSTN, 1, 1);
+	tasklet_async command error_t RadioSend.send(message_t* msg)
+	{
+		error_t error;
 
-#endif // _H_hardware_h
+		if( state == STATE_READY )
+		{
+			if( call Config.requiresSoftwareCCA(msg) )
+			{
+				txMsg = msg;
+
+				if( (error = call SubCCA.request()) == SUCCESS )
+					state = STATE_CCA_WAIT;
+			}
+			else if( (error = call SubSend.send(msg)) == SUCCESS )
+				state = STATE_SEND;
+		}
+		else
+			error = EBUSY;
+
+		return error;
+	}
+
+	tasklet_async event void SubCCA.done(error_t error)
+	{
+		RADIO_ASSERT( state == STATE_CCA_WAIT );
+
+		if( error == SUCCESS && (error = call SubSend.send(txMsg)) == SUCCESS )
+			state = STATE_SEND;
+		else
+		{
+			state = STATE_READY;
+			signal RadioSend.sendDone(EBUSY);
+		}
+	}
+
+	tasklet_async event void SubSend.sendDone(error_t error)
+	{
+		RADIO_ASSERT( state == STATE_SEND );
+
+		state = STATE_READY;
+		signal RadioSend.sendDone(error);
+	}
+}

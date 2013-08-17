@@ -26,6 +26,8 @@ for (split(/\n/, <<'EOText'
 
 
   %T/chips/cc2520
+  %T/chips/cc2520/layers
+  %T/chips/cc2520/util
 
   %T/lib/timer
   %T/lib/serial

@@ -63,7 +63,7 @@ implementation {
        * setControlAsCapture clears out both CCIE (pending Interrupt
        * as well as COV (overflow).
        */
-      call Msp430TimerControl.setControlAsCapture( mode, MSP430TIMER_CCI_A );
+      call Msp430TimerControl.setControlAsCapture( mode );
       call Msp430TimerControl.enableEvents();
     }
     return SUCCESS;

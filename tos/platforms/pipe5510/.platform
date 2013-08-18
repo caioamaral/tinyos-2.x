@@ -14,9 +14,11 @@ for (split(/\n/, <<'EOText'
   %P/chips/cc2520
 
   %T/chips/msp430/x5xxx
+  %T/chips/msp430/x5xxx/pins
   %T/chips/msp430/x5xxx/lpm
   %T/chips/msp430/x5xxx/timer
-  %T/chips/msp430/x5xxx/usci
+  %T/chips/msp430/x5xxx/usci-v2
+  %T/chips/msp430/x5xxx/usci-v2/i2c-sm
   %T/chips/msp430
   %T/chips/msp430/pins
   %T/chips/msp430/timer
@@ -32,6 +34,8 @@ for (split(/\n/, <<'EOText'
   %T/lib/serial
   %T/lib/power
   %T/lib/printf
+
+#  %/lib/diagmsg
 
 EOText
 )) {

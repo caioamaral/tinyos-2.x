@@ -46,9 +46,9 @@ enum {
 };
 
 /* Use the PlatformAdcC component, and enable 8 pins */
-#define ADC12_USE_PLATFORM_ADC 1
-#define ADC12_PIN_AUTO_CONFIGURE 1
-#define ADC12_PINS_AVAILABLE 4
+//#define ADC12_USE_PLATFORM_ADC 1
+//#define ADC12_PIN_AUTO_CONFIGURE 1
+//#define ADC12_PINS_AVAILABLE 4
 
 /* @TODO@ Disable probe for XT1 support until the anomaly observed in
  * apps/bootstrap/LocalTime is resolved. */
@@ -56,10 +56,13 @@ enum {
 #define PLATFORM_MSP430_HAS_XT1 1
 #endif /* PLATFORM_MSP430_HAS_XT1 */
 
+// Don't know if this is right, just testing
+#define MSP430_HAS_ADC10 1
+
 // LEDs
-TOSH_ASSIGN_PIN(RED_LED, 4, 7);
-TOSH_ASSIGN_PIN(GREEN_LED, 5, 1 )
-//TOSH_ASSIGN_PIN(YELLOW_LED, 1, 2);
+TOSH_ASSIGN_PIN(RED_LED, 4, 6);
+TOSH_ASSIGN_PIN(GREEN_LED, 4, 7 )
+TOSH_ASSIGN_PIN(YELLOW_LED, 5, 1);
 
 // CC2520 RADIO #defines
 TOSH_ASSIGN_PIN(RADIO_CSN, 4, 0);

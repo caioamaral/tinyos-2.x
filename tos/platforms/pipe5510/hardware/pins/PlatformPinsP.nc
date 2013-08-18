@@ -48,11 +48,19 @@ implementation {
 
   command error_t Init.init() {
     atomic {
-      /*
-       * for now, just leave it all as the reset state.
-       *
-       * 5438, all input, with OUT/IN left alone.
-       */
+	//Port 1
+	
+	P1OUT = 0x02;
+	P1DIR = 0x82;
+	
+	P4OUT = 0x31;
+	P4DIR = 0xD1;
+
+	P5OUT = 0x00;
+	P5DIR = 0x02;
+      
+
+
 
 #if 0 /* Disabled: these specific setting sare defaults, but others might not be */
       PMAPPWD = PMAPPW;                         // Get write-access to port mapping regs
@@ -60,6 +68,7 @@ implementation {
       P1MAP6 = PM_UCA0TXD;                      // Map UCA0TXD output to P1.6
       PMAPPWD = 0;                              // Lock port mapping registers
 #endif //
+
 
     }
     return SUCCESS;

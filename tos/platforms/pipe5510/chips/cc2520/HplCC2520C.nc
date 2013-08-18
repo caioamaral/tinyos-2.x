@@ -97,7 +97,7 @@ implementation {
   SFD   = SFDM;
   VREN  = VRENM;
 
-  components P81SfdCaptureC as SfdCaptureC;
+  components P12SfdCaptureC as SfdCaptureC;
   components Msp430TimerC;
   SfdCapture = SfdCaptureC;
 
@@ -115,7 +115,8 @@ implementation {
    * show up in TA0CCR1 and will set CCIFG in TA0CCTL1.  Units in TA0CCR1
    * will be 32KiHz jiffies.
    *
-   * In our 5510, the SFD is wired in P1.2/TA0.1
+   * Caio: In our 5510, the SFD is wired in P1.2/TA0.1 TA0CCI1A.
+   * The capture will show on TA0CCTL1
    *
    */
   SfdCaptureC.Msp430TimerControl -> Msp430TimerC.Control0_A1;

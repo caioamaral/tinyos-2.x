@@ -64,7 +64,7 @@ configuration HplCC2520C {
   }
 }
 implementation {
-  components new Msp430UsciSpiB0C() as SpiC;
+  components new Msp430UsciSpiB1C() as SpiC;
   SpiResource = SpiC;
   SpiByte     = SpiC;
   SpiPacket   = SpiC;
@@ -81,12 +81,12 @@ implementation {
   components new Msp430GpioC() as SFDM;
   components new Msp430GpioC() as VRENM;
 
-  CCAM   -> GeneralIOC.Port13; 
-  CSNM   -> GeneralIOC.Port30;
-  FIFOM  -> GeneralIOC.Port15; 
-  FIFOPM -> GeneralIOC.Port16;
-  RSTNM  -> GeneralIOC.Port12;
-  SFDM   -> GeneralIOC.Port81;
+  CCAM   -> GeneralIOC.Port16; 
+  CSNM   -> GeneralIOC.Port40;
+  FIFOM  -> GeneralIOC.Port14; 
+  FIFOPM -> GeneralIOC.Port15;
+  RSTNM  -> GeneralIOC.Port11;
+  SFDM   -> GeneralIOC.Port12;
   VRENM  -> GeneralIOC.Port17;
   
   CCA   = CCAM;
@@ -114,18 +114,21 @@ implementation {
    * TA0 via TA0.CCI1B which requires using TA0CCTL1.   The capture will
    * show up in TA0CCR1 and will set CCIFG in TA0CCTL1.  Units in TA0CCR1
    * will be 32KiHz jiffies.
+   *
+   * In our 5510, the SFD is wired in P1.2/TA0.1
+   *
    */
   SfdCaptureC.Msp430TimerControl -> Msp430TimerC.Control0_A1;
   SfdCaptureC.Msp430Capture      -> Msp430TimerC.Capture0_A1;
-  SfdCaptureC.GeneralIO          -> GeneralIOC.Port81;
+  SfdCaptureC.GeneralIO          -> GeneralIOC.Port12;
 
   components HplMsp430InterruptC;
   components new Msp430InterruptC() as InterruptFIFOC;
   components new Msp430InterruptC() as InterruptFIFOPC;
   FifoInterrupt  = InterruptFIFOC.Interrupt;
   FifopInterrupt = InterruptFIFOPC.Interrupt;
-  InterruptFIFOC.HplInterrupt  -> HplMsp430InterruptC.Port15;
-  InterruptFIFOPC.HplInterrupt -> HplMsp430InterruptC.Port16;
+  InterruptFIFOC.HplInterrupt  -> HplMsp430InterruptC.Port14;
+  InterruptFIFOPC.HplInterrupt -> HplMsp430InterruptC.Port15;
 
   components new Alarm32khz16C() as AlarmC;
   Alarm = AlarmC;

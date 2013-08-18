@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013 Eric B. Decker
+ * Copyright (c) 2007, Vanderbilt University
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -29,46 +29,35 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
  * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
- * OF THE POSSIBILITY OF SUCH DAMAGE.
+ * OF THE POSSIBILITY OF SUCH DAMAGE.* All rights reserved.
  */
 
-/**
- * @author Eric B. Decker <cire831@gmail.com>
+ /**
+ *  Stephen Dawson-Haggerty <stevedh@eecs.berkeley.edu>
+ *  Dummy Extended Address
  */
 
-#include "msp430usci.h"
+#include "IeeeEui64.h"
 
-/*
- * MM5, 5510, USCI, SPI
- * x5 usci configuration
- */
+module LocalIeeeEui64C {
+  provides interface LocalIeeeEui64;
+} implementation {
+  command ieee_eui64_t LocalIeeeEui64.getId() {
+    ieee_eui64_t id;
+    /* this is UCB's OUI */
+    id.data[0] = 0x00;
+    id.data[1] = 0x12;
+    id.data[2] = 0x6d;
 
-const msp430_usci_config_t cc2520_spi_config = {
-  /*
-   * UCCKPH: 0,
-   * UCCKPL: 0,
-   * UCMSB:  1,
-   * UC7BIT: 0,
-   * UCMST:  1,
-   * UCMODE: 0b00,
-   * UCSYNC: 1,
-   * UCSSEL: SMCLK,
-   */
-  ctl0 : (UCMSB | UCMST | UCSYNC),
-  ctl1 : UCSSEL__SMCLK,
-  br0  : 2,			/* 8MHz -> 4 MHz */
-  br1  : 0,
-  mctl : 0,                     /* Always 0 in SPI mode */
-  i2coa: 0
-};
+    /* UCB will let anyone use this OUI so long as these two octets
+       are 'LO' -- "local".  All other octets are reserved.  */
+    /* SDH -- 9/10/2010 */
+    id.data[3] = 'L';
+    id.data[4] = 'O';
 
-
-module CC2520SpiConfigP {
-  provides interface Msp430UsciConfigure;
-}
-implementation {
-  async command const msp430_usci_config_t *Msp430UsciConfigure.getConfiguration() {
-    return &cc2520_spi_config;
+    id.data[5] = 0;
+    id.data[6] = TOS_NODE_ID >> 8;
+    id.data[7] = TOS_NODE_ID & 0xff;
+    return id;
   }
-
 }

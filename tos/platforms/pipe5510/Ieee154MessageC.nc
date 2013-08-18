@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013 Eric B. Decker
+ * Copyright (c) 2008 The Regents of the University  of California.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -33,42 +33,42 @@
  */
 
 /**
- * @author Eric B. Decker <cire831@gmail.com>
+ * @author Stephen Dawson-Haggerty
  */
 
-#include "msp430usci.h"
+configuration Ieee154MessageC  {
+  provides {
+    interface SplitControl;
 
-/*
- * MM5, 5510, USCI, SPI
- * x5 usci configuration
- */
+    interface Resource as SendResource[uint8_t clientId];
+    interface Ieee154Send;
+    interface Receive as Ieee154Receive;
 
-const msp430_usci_config_t cc2520_spi_config = {
-  /*
-   * UCCKPH: 0,
-   * UCCKPL: 0,
-   * UCMSB:  1,
-   * UC7BIT: 0,
-   * UCMST:  1,
-   * UCMODE: 0b00,
-   * UCSYNC: 1,
-   * UCSSEL: SMCLK,
-   */
-  ctl0 : (UCMSB | UCMST | UCSYNC),
-  ctl1 : UCSSEL__SMCLK,
-  br0  : 2,			/* 8MHz -> 4 MHz */
-  br1  : 0,
-  mctl : 0,                     /* Always 0 in SPI mode */
-  i2coa: 0
-};
+    interface Ieee154Packet;
+    interface Packet;
 
-
-module CC2520SpiConfigP {
-  provides interface Msp430UsciConfigure;
-}
-implementation {
-  async command const msp430_usci_config_t *Msp430UsciConfigure.getConfiguration() {
-    return &cc2520_spi_config;
+    interface PacketAcknowledgements;
+    interface LinkPacketMetadata;
+    interface LowPowerListening;
+    interface PacketLink;
   }
 
+} implementation {
+  /*
+   * This references CC2420Ieee153MessageC but we are using
+   * the CC2520.   Is there any difference?
+   */
+  components CC2420Ieee154MessageC as Msg;
+
+  SplitControl = Msg;
+  SendResource = Msg;
+  Ieee154Send  = Msg;
+  Ieee154Receive = Msg;
+  Ieee154Packet = Msg;
+  Packet = Msg;
+
+  PacketAcknowledgements = Msg;
+  LinkPacketMetadata = Msg;
+  LowPowerListening = Msg;
+  PacketLink = Msg;
 }

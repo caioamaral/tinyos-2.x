@@ -61,7 +61,7 @@ EOText
 $ENV{'CIL_MACHINE'} =
     "version_major=3 " .
     "version_minor=2 " .
-    "version=msp430-3.2.3 " .
+    "version=msp430-4.6.3 " .
     "short=2,2 " .
     "int=2,2 " .
     "long=4,2 " .

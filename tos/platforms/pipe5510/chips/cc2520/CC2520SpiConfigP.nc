@@ -50,11 +50,11 @@ const msp430_usci_config_t cc2520_spi_config = {
    * UCMSB:  1,
    * UC7BIT: 0,
    * UCMST:  1,
-   * UCMODE: 0b00,
+   * UCMODE: 0b10, // 4 pin SPI Active low.
    * UCSYNC: 1,
    * UCSSEL: SMCLK,
    */
-  ctl0 : (UCMSB | UCMST | UCSYNC),
+  ctl0 : (00101101), // (UCMSB | UCMST | UCMODE 0b10 | UCSYNC)
   ctl1 : UCSSEL__SMCLK,
   br0  : 2,			/* 8MHz -> 4 MHz */
   br1  : 0,

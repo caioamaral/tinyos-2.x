@@ -64,7 +64,7 @@ configuration HplCC2520C {
   }
 }
 implementation {
-  components new Msp430UsciSpiB1C() as SpiC;
+  components new Msp430UsciSpiA1C() as SpiC;
   SpiResource = SpiC;
   SpiByte     = SpiC;
   SpiPacket   = SpiC;
@@ -82,7 +82,7 @@ implementation {
   components new Msp430GpioC() as VRENM;
 
   CCAM   -> GeneralIOC.Port17;
-  CSNM   -> GeneralIOC.Port40;
+  CSNM   -> GeneralIOC.Port43;
   FIFOM  -> GeneralIOC.Port15; 
   FIFOPM -> GeneralIOC.Port16;
   RSTNM  -> GeneralIOC.Port13;
@@ -128,8 +128,8 @@ implementation {
   components new Msp430InterruptC() as InterruptFIFOPC;
   FifoInterrupt  = InterruptFIFOC.Interrupt;
   FifopInterrupt = InterruptFIFOPC.Interrupt;
-  InterruptFIFOC.HplInterrupt  -> HplMsp430InterruptC.Port14;
-  InterruptFIFOPC.HplInterrupt -> HplMsp430InterruptC.Port15;
+  InterruptFIFOC.HplInterrupt  -> HplMsp430InterruptC.Port15;
+  InterruptFIFOPC.HplInterrupt -> HplMsp430InterruptC.Port16;
 
   components new Alarm32khz16C() as AlarmC;
   Alarm = AlarmC;

@@ -42,6 +42,7 @@
  * @author Peter A. Bigot <pab@peoplepowerco.com>
  * @author Eric B. Decker <cire831@gmail.com>
  * @author João Gonçalves <joao.m.goncalves@ist.utl.pt>
+ * @author Caio Amaral <eng.caioamaral@gmail.com>
  */
 
 configuration HplMsp430GeneralIOC {
@@ -456,7 +457,7 @@ configuration HplMsp430GeneralIOC {
 
 
 /*
- * x5 family: msp430f551{10,09,08}
+ * x5 family: msp430f55xx{10,09,08}
  * in particular 5510
  */
 #if defined(__MSP430F5510) || defined(__MSP430F5509) || defined(__MSP430F5508)

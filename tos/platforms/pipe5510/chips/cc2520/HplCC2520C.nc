@@ -81,13 +81,13 @@ implementation {
   components new Msp430GpioC() as SFDM;
   components new Msp430GpioC() as VRENM;
 
-  CCAM   -> GeneralIOC.Port16; 
+  CCAM   -> GeneralIOC.Port17;
   CSNM   -> GeneralIOC.Port40;
-  FIFOM  -> GeneralIOC.Port14; 
-  FIFOPM -> GeneralIOC.Port15;
-  RSTNM  -> GeneralIOC.Port11;
+  FIFOM  -> GeneralIOC.Port15; 
+  FIFOPM -> GeneralIOC.Port16;
+  RSTNM  -> GeneralIOC.Port13;
   SFDM   -> GeneralIOC.Port12;
-  VRENM  -> GeneralIOC.Port17;
+  VRENM  -> GeneralIOC.Port20;
   
   CCA   = CCAM;
   CSN   = CSNM;

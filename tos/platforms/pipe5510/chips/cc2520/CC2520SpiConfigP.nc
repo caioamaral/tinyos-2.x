@@ -70,5 +70,4 @@ implementation {
   async command const msp430_usci_config_t *Msp430UsciConfigure.getConfiguration() {
     return &cc2520_spi_config;
   }
-
 }

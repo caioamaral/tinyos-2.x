@@ -12,8 +12,8 @@ implementation {
 
   components PlatformSpiP;
 
-//  components MainC;
-//  MainC.SoftwareInit -> PlatformSpiP;
+  components MainC;
+  MainC.SoftwareInit -> PlatformSpiP;
 
   components new Msp430UsciSpiB1C() as SpiC;
 

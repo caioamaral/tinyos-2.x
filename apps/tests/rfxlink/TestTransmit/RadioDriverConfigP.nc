@@ -51,6 +51,8 @@ module RadioDriverConfigP
 		interface RFA1DriverConfig as RadioDriverConfig;
 #elif defined(PLATFORM_UCDUAL)
 		interface Si443xDriverConfig as RadioDriverConfig;
+#elif defined(PLATFORM_PIPE5510)
+		interface CC2520DriverConfig as RadioDriverConfig;
 #endif
 	}
 }

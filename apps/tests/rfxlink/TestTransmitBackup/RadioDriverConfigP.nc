@@ -1,5 +1,5 @@
 /*
-* Copyright (c) 2009-2010 People Power Co.
+ * Copyright (c) 2007, Vanderbilt University
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -8,13 +8,11 @@
  *
  * - Redistributions of source code must retain the above copyright
  *   notice, this list of conditions and the following disclaimer.
- *
  * - Redistributions in binary form must reproduce the above copyright
  *   notice, this list of conditions and the following disclaimer in the
  *   documentation and/or other materials provided with the
  *   distribution.
- *
- * - Neither the name of the copyright holders nor the names of
+ * - Neither the name of the copyright holder nor the names of
  *   its contributors may be used to endorse or promote products derived
  *   from this software without specific prior written permission.
  *
@@ -31,54 +29,58 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- * @author Peter Bigot
+ * Author: Miklos Maroti
  */
 
-#ifndef _H_hardware_h
-#define _H_hardware_h
+#include "Tasklet.h"
+#include "RadioAssert.h"
+#include "message.h"
+#include "RadioConfig.h"
 
-#include "msp430hardware.h"
+module RadioDriverConfigP
+{
+	provides
+	{
+#if defined(PLATFORM_IRIS) || defined(PLATFORM_MULLE) || defined(PLATFORM_MESHBEAN)
+		interface RF230DriverConfig as RadioDriverConfig;
+#elif defined(PLATFORM_MESHBEAN900)
+		interface RF212DriverConfig as RadioDriverConfig;
+#elif defined(PLATFORM_MICAZ) || defined(PLATFORM_TELOSA) || defined(PLATFORM_TELOSB)
+		interface CC2420XDriverConfig as RadioDriverConfig;
+#elif defined(PLATFORM_UCMINI)
+		interface RFA1DriverConfig as RadioDriverConfig;
+#elif defined(PLATFORM_UCDUAL)
+		interface Si443xDriverConfig as RadioDriverConfig;
+#endif
+	}
+}
 
-// enum so components can override power saving,
-// as per TEP 112.
-enum {
-  TOS_SLEEP_NONE = MSP430_POWER_ACTIVE,
-};
+implementation
+{
+	async command uint8_t RadioDriverConfig.headerLength(message_t* msg)
+	{
+		return 0;
+	}
 
-/* Use the PlatformAdcC component, and enable 8 pins */
-//#define ADC12_USE_PLATFORM_ADC 1
-//#define ADC12_PIN_AUTO_CONFIGURE 1
-//#define ADC12_PINS_AVAILABLE 4
+	async command uint8_t RadioDriverConfig.maxPayloadLength()
+	{
+		return sizeof(message_header_t) + TOSH_DATA_LENGTH;
+	}
 
-/* @TODO@ Disable probe for XT1 support until the anomaly observed in
- * apps/bootstrap/LocalTime is resolved. */
-#ifndef PLATFORM_MSP430_HAS_XT1
-#define PLATFORM_MSP430_HAS_XT1 1
-#endif /* PLATFORM_MSP430_HAS_XT1 */
+	async command uint8_t RadioDriverConfig.metadataLength(message_t* msg)
+	{
+		return 0;
+	}
 
-// Caio: Added This Line but Dont know if this is right, normally was ACD12, but we have an 10bit ADC
-#define MSP430_HAS_ADC10 1
+#if ! defined(PLATFORM_UCMINI)
+	async command uint8_t RadioDriverConfig.headerPreloadLength()
+	{
+		return 7;
+	}
+#endif
 
-// LEDs
-TOSH_ASSIGN_PIN(RED_LED, 4, 6);
-TOSH_ASSIGN_PIN(GREEN_LED, 4, 7 )
-TOSH_ASSIGN_PIN(YELLOW_LED, 5, 1);
-
-// CC2520 RADIO #defines
-TOSH_ASSIGN_PIN(RADIO_CSN, 4, 0);
-TOSH_ASSIGN_PIN(RADIO_VREF, 2, 0);
-TOSH_ASSIGN_PIN(RADIO_RESET, 1, 3);
-TOSH_ASSIGN_PIN(RADIO_FIFOP, 1, 6);
-TOSH_ASSIGN_PIN(RADIO_SFD, 1, 2);
-TOSH_ASSIGN_PIN(RADIO_GIO0, 1, 4);
-TOSH_ASSIGN_PIN(RADIO_FIFO, 1, 5);
-TOSH_ASSIGN_PIN(RADIO_GIO1, 1, 5);
-TOSH_ASSIGN_PIN(RADIO_CCA, 1, 7);
-
-TOSH_ASSIGN_PIN(CC_FIFOP, 1, 6);
-TOSH_ASSIGN_PIN(CC_FIFO, 1, 5);
-TOSH_ASSIGN_PIN(CC_SFD, 1, 2);
-TOSH_ASSIGN_PIN(CC_VREN, 2, 0);
-TOSH_ASSIGN_PIN(CC_RSTN, 1, 3);
-
-#endif // _H_hardware_h
+	async command bool RadioDriverConfig.requiresRssiCca(message_t* msg)
+	{
+		return FALSE;
+	}
+}

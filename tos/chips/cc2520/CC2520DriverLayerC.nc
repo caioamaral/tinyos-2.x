@@ -52,10 +52,10 @@ configuration CC2520DriverLayerC
 		interface PacketField<uint8_t> as PacketRSSI;
 		interface PacketField<uint8_t> as PacketTimeSyncOffset;
 		interface PacketField<uint8_t> as PacketLinkQuality;
-    //interface PacketField<uint8_t> as AckReceived;
+    		//interface PacketField<uint8_t> as AckReceived;
 
 		interface LocalTime<TRadio> as LocalTimeRadio;
-    interface Alarm<TRadio, tradio_size>;
+    		interface Alarm<TRadio, tradio_size>;
 
 		interface PacketAcknowledgements;
 	}
@@ -65,11 +65,11 @@ configuration CC2520DriverLayerC
 		interface CC2520DriverConfig as Config;
 		interface PacketTimeStamp<TRadio, uint32_t>;
 
-    interface PacketFlag as TransmitPowerFlag;
-    interface PacketFlag as RSSIFlag;    
-    interface PacketFlag as TimeSyncFlag; 
-    interface PacketFlag as AckReceivedFlag;
-    interface RadioAlarm;     
+    		interface PacketFlag as TransmitPowerFlag;
+    		interface PacketFlag as RSSIFlag;    
+    		interface PacketFlag as TimeSyncFlag; 
+    		interface PacketFlag as AckReceivedFlag;
+    		interface RadioAlarm;     
 	}
 }
 

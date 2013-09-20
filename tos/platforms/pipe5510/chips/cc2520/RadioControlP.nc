@@ -1,29 +1,27 @@
 /*
- * Copyright (c) 2009-2010 People Power Co.
+ * Copyright (c) 2011 University of Utah. 
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
- * are met:
+ * are met:  
  *
  * - Redistributions of source code must retain the above copyright
  *   notice, this list of conditions and the following disclaimer.
- *
  * - Redistributions in binary form must reproduce the above copyright
  *   notice, this list of conditions and the following disclaimer in the
  *   documentation and/or other materials provided with the
  *   distribution.
- *
- * - Neither the name of the copyright holders nor the names of
+ * - Neither the name of the copyright holder nor the names of
  *   its contributors may be used to endorse or promote products derived
  *   from this software without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ * ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
  * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
- * FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL
- * THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
- * INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE
+ * COPYRIGHT HOLDER OR ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+ * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
  * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
@@ -32,29 +30,37 @@
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "msp430usci.h"
-
 /**
- * Connect the appropriate pins for USCI support on a MSP430F5510
- *
- * @author Peter A. Bigot <pab@peoplepowerco.com>
+ * @author Thomas Schmid
  */
 
-configuration PlatformUsciMapC {
-} implementation {
-  components HplMsp430GeneralIOC as GIO;
+module RadioControlP {
+  provides interface SplitControl as HighRadioControl;
+  uses interface SplitControl as LowRadioControl;
+  uses interface HplSam3TC as TC;
+}
+implementation {
+  command error_t HighRadioControl.start(){
+    // start TC0
+    call TC.enableTC1();
+    return call LowRadioControl.start();
+  }
 
-  components Msp430UsciUartA1P as UartA1C;
-  UartA1C.URXD -> GIO.UCA1RXD;
-  UartA1C.UTXD -> GIO.UCA1TXD;
+  command error_t HighRadioControl.stop(){
+    // stop TC1 
+    call TC.disableTC1();
+    return call LowRadioControl.stop();
+  }
 
-  components Msp430UsciSpiA1P as SpiA1C;
-  SpiA1C.SIMO -> GIO.UCA1SIMO;
-  SpiA1C.SOMI -> GIO.UCA1SOMI;
-  SpiA1C.CLK  -> GIO.UCA1CLK;
+  event void LowRadioControl.startDone(error_t error){
+    signal HighRadioControl.startDone(error);
+  }
 
-  components Msp430UsciSpiB1P as SpiB1C;
-  SpiB1C.SIMO -> GIO.UCB1SIMO;
-  SpiB1C.SOMI -> GIO.UCB1SOMI;
-  SpiB1C.CLK  -> GIO.UCB1CLK;
+  event void LowRadioControl.stopDone(error_t error) {
+    signal HighRadioControl.stopDone(error);
+  }
+
+  default event void HighRadioControl.startDone(error_t error) {}
+
+  default event void HighRadioControl.stopDone(error_t error) {}
 }

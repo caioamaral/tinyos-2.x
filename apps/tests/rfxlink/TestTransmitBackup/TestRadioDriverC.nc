@@ -42,7 +42,6 @@ implementation
 	#define UQ_RADIO_ALARM		"UQ_RADIO_ALARM"
 
 	components TestRadioDriverP, MainC, SerialActiveMessageC, AssertC, LedsC;
-
 	TestRadioDriverP.Boot -> MainC;
 	TestRadioDriverP.SplitControl -> SerialActiveMessageC;
 	TestRadioDriverP.RadioState -> RadioDriverLayerC;
@@ -89,9 +88,6 @@ implementation
 #elif defined(PLATFORM_UCDUAL)
 	components Si443xDriverLayerC as RadioDriverLayerC;
 	components Si443xRadioP as RadioP;
-#elif defined(PLATFORM_PIPE5510)
-	components CC2520DriverLayerC as RadioDriverLayerC;
-	components CC2520RadioP as RadioP;
 #endif
 
 	components RadioDriverConfigP;

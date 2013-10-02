@@ -1,6 +1,6 @@
-// $Id: Timer62500C.nc,v 1.2 2010-06-29 22:07:56 scipio Exp $
 /*
- * Copyright (c) 2005 Stanford University. All rights reserved.
+ * Copyright (c) 2013 Eric B. Decker
+ * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -8,11 +8,13 @@
  *
  * - Redistributions of source code must retain the above copyright
  *   notice, this list of conditions and the following disclaimer.
+ *
  * - Redistributions in binary form must reproduce the above copyright
  *   notice, this list of conditions and the following disclaimer in the
  *   documentation and/or other materials provided with the
  *   distribution.
- * - Neither the name of the copyright holder nor the names of
+ *
+ * - Neither the name of the copyright holders nor the names of
  *   its contributors may be used to endorse or promote products derived
  *   from this software without specific prior written permission.
  *
@@ -31,22 +33,63 @@
  */
 
 /**
- * The virtualized 62500 Hz timer abstraction. Instantiating this 
- * component gives an 62500 Hz granularity timer.
- *
- * @author Philip Levis
- * @author: Jan Hauer <hauer@tkn.tu-berlin.de> (62500hz)
- * @date   January 16 2006
- * @see    TEP 102: Timers
- */ 
+ * @author Eric B. Decker <cire831@gmail.com>
+ * @author Caio Amaral <eng.caioamaral@gmail.com> (Edit to USART)
+ */
 
-#include "Timer62500hz.h"
+#include "msp430usart.h"
 
-generic configuration Timer62500C() {
-  provides interface Timer<T62500hz>;
+/*
+ * PIPE1611 UART configuration
+ */
+
+
+  enum {
+// from http://www.daycounter.com/Calculators/MSP430-Uart-Calculator.phtml
+  UBR_4MHZ_4800=0x0369,   UMCTL_4MHZ_4800=0xfb,
+  UBR_4MHZ_9600=0x01b4,   UMCTL_4MHZ_9600=0xdf,
+  UBR_4MHZ_57600=0x0048,  UMCTL_4MHZ_57600=0xfb,
+  UBR_4MHZ_115200=0x0024, UMCTL_4MHZ_115200=0x4a,
+
+  UBR_3_7MHZ_115200=0x0020, UMCTL_3_7MHZ_115200=0x00,
+
+ };  
+
+
+msp430_uart_union_config_t msp430_uart_pipe1611_config = {
+   ubr: UBR_4MHZ_115200, 
+   umctl: UBR_4MHZ_115200,
+   ssel: 0x02, pena: 0,
+   pev: 0, spb: 0,
+   clen: 1,
+   listen: 0,
+   mm: 0,
+   ckpl: 0,
+   urxse: 0,
+   urxeie: 1,
+   urxwie: 0,
+   utxe : 1,
+   urxe : 1 
+};
+
+
+module HeyPlatformSerialP {
+  provides interface StdControl;
+  provides interface Msp430UartConfigure;
+  uses interface Resource;
 }
 implementation {
-  components Timer62500P;
-  Timer = Timer62500P.Timer62500[unique(UQ_TIMER_62500HZ)];
-}
 
+  command error_t StdControl.start(){
+    return call Resource.immediateRequest();
+  }
+  command error_t StdControl.stop(){
+    call Resource.release();
+    return SUCCESS;
+  }
+  event void Resource.granted(){}
+
+  async command msp430_uart_union_config_t* Msp430UartConfigure.getConfig() {
+    return &msp430_uart_pipe1611_config;
+  }
+}

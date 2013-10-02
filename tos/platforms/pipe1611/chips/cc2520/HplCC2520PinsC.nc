@@ -30,14 +30,15 @@
  */
 
 /**
- * HPL implementation of general-purpose I/O for the ChipCon CC2420
+ * HPL implementation of general-purpose I/O for the ChipCon CC2520
  * radio connected to a TI MSP430 processor.
  *
  * @author Jonathan Hui <jhui@archrock.com>
+ * @author Caio Amaral <eng.caioamaral@gmail.com> (Edited)
  * @version $Revision: 1.4 $ $Date: 2006-12-12 18:23:44 $
  */
 
-configuration HplCC2420PinsC {
+configuration HplCC2520PinsC {
 
   provides interface GeneralIO as CCA;
   provides interface GeneralIO as CSN;
@@ -60,13 +61,13 @@ implementation {
   components new Msp430GpioC() as SFDM;
   components new Msp430GpioC() as VRENM;
 
-  CCAM -> GeneralIOC.Port14;
-  CSNM -> GeneralIOC.Port42;
-  FIFOM -> GeneralIOC.Port13;
-  FIFOPM -> GeneralIOC.Port10;
-  RSTNM -> GeneralIOC.Port46;
-  SFDM -> GeneralIOC.Port41;
-  VRENM -> GeneralIOC.Port45;
+  CCAM -> GeneralIOC.Port17;
+  CSNM -> GeneralIOC.Port30;
+  FIFOM -> GeneralIOC.Port14;
+  FIFOPM -> GeneralIOC.Port16;
+  RSTNM -> GeneralIOC.Port13;
+  SFDM -> GeneralIOC.Port11;
+  VRENM -> GeneralIOC.Port15;
 
   CCA = CCAM;
   CSN = CSNM;

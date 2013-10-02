@@ -92,6 +92,9 @@ implementation
 #elif defined(PLATFORM_PIPE5510)
 	components CC2520DriverLayerC as RadioDriverLayerC;
 	components CC2520RadioP as RadioP;
+#elif defined(PLATFORM_PIPE1611)
+	components CC2520DriverLayerC as RadioDriverLayerC;
+	components CC2520RadioP as RadioP;
 #endif
 
 	components RadioDriverConfigP;

@@ -10,27 +10,18 @@ push( @includes, qw(
   %P/hardware/clock
   %P/hardware/leds
   %P/hardware/sensor
+  %P/hardware/pins
   %P/hardware/timer
   %P/hardware/uart
+  %P/chips/cc2520
 
+  %T/chips/cc2520
+  %T/chips/cc2520/layers
+  %T/chips/cc2520/util
+ 
 
-  %T/platforms/pipe1611
-#  %T/platforms/telosa
-  %T/platforms/telosa/chips/cc2420
-  %T/chips/cc2420
-  %T/chips/cc2420/alarm
-  %T/chips/cc2420/control
-  %T/chips/cc2420/csma
-  %T/chips/cc2420/interfaces
-  %T/chips/cc2420/link
-  %T/chips/cc2420/lowpan
-  %T/chips/cc2420/lpl
-  %T/chips/cc2420/packet
-  %T/chips/cc2420/receive
-  %T/chips/cc2420/spi
-  %T/chips/cc2420/transmit
-  %T/chips/cc2420/unique
-  %T/chips/cc2420/security
+  %T/lib/rfxlink/layers
+  %T/lib/rfxlink/util
 
   %T/chips/msp430/x1x2/timer
   %T/chips/msp430/x1xxx

@@ -30,14 +30,15 @@
  */
 
 /**
- * HPL implementation of the SPI bus for the ChipCon CC2420 radio
+ * HPL implementation of the SPI bus for the ChipCon CC2520 radio
  * connected to a TI MSP430 processor.
  *
  * @author Jonathan Hui <jhui@archrock.com>
+ * @author Caio Amaral <eng.caioamaral@gmail.com> (Edited)
  * @version $Revision: 1.4 $ $Date: 2006-12-12 18:23:44 $
  */
 
-generic configuration HplCC2420SpiC() {
+generic configuration HplCC2520SpiC() {
   
   provides interface Resource;
   provides interface SpiByte;

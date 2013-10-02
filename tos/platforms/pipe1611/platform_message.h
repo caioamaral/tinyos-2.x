@@ -1,5 +1,8 @@
-/* $Id: platform_message.h,v 1.6 2010-06-29 22:07:55 scipio Exp $
- * Copyright (c) 2005 The Regents of the University  of California.  
+/*
+ * Copyright (c) 2013 Eric B. Decker
+ * Copyright (c) 2009 Stanford University.
+ * Copyright (c) 2005 The Regents of the University  of California.
+ * Copyright (c) 2002-2005 Intel Corporation
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -8,11 +11,13 @@
  *
  * - Redistributions of source code must retain the above copyright
  *   notice, this list of conditions and the following disclaimer.
+ *
  * - Redistributions in binary form must reproduce the above copyright
  *   notice, this list of conditions and the following disclaimer in the
  *   documentation and/or other materials provided with the
  *   distribution.
- * - Neither the name of the University of California nor the names of
+ *
+ * - Neither the name of the copyright holders nor the names of
  *   its contributors may be used to endorse or promote products derived
  *   from this software without specific prior written permission.
  *
@@ -28,43 +33,35 @@
  * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
  * OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- * Copyright (c) 2002-2005 Intel Corporation
- * All rights reserved.
- *
- * This file is distributed under the terms in the attached INTEL-LICENSE     
- * file. If you do not find these files, copies can be found by writing to
- * Intel Research Berkeley, 2150 Shattuck Avenue, Suite 1300, Berkeley, CA, 
- * 94704.  Attention:  Intel License Inquiry.
  */
 
 /**
  * Defining the platform-independently named packet structures to be the
- * chip-specific CC1000 packet structures.
+ * chip-specific CC2520 packet structures.
  *
  * @author Philip Levis
- * @version $Revision: 1.6 $ $Date: 2010-06-29 22:07:55 $
+ * @author Wanja Hofer <wanja@cs.fau.de>
+ * @author Eric B. Decker <cire831@gmail.com>
  */
-
 
 #ifndef PLATFORM_MESSAGE_H
 #define PLATFORM_MESSAGE_H
 
-#include <CC2420.h>
 #include <Serial.h>
+#include "CC2520Radio.h"
 
 typedef union message_header {
-  cc2420_header_t cc2420;
+  cc2520packet_header_t cc2520;
   serial_header_t serial;
 } message_header_t;
 
-typedef union TOSRadioFooter {
-  cc2420_footer_t cc2420;
+typedef union message_footer {
+  cc2520packet_footer_t cc2520;
 } message_footer_t;
 
-typedef union TOSRadioMetadata {
-  cc2420_metadata_t cc2420;
-  serial_metadata_t serial;
+typedef union message_metadata {
+  cc2520packet_metadata_t cc2520;
+	serial_metadata_t serial;
 } message_metadata_t;
 
 #endif

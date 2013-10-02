@@ -1,5 +1,5 @@
-
-/* Copyright (c) 2000-2003 The Regents of the University of California.  
+/*
+ * Copyright (c) 2009-2010 People Power Co.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -8,11 +8,13 @@
  *
  * - Redistributions of source code must retain the above copyright
  *   notice, this list of conditions and the following disclaimer.
+ *
  * - Redistributions in binary form must reproduce the above copyright
  *   notice, this list of conditions and the following disclaimer in the
  *   documentation and/or other materials provided with the
  *   distribution.
- * - Neither the name of the copyright holder nor the names of
+ *
+ * - Neither the name of the copyright holders nor the names of
  *   its contributors may be used to endorse or promote products derived
  *   from this software without specific prior written permission.
  *
@@ -31,27 +33,19 @@
  */
 
 /**
+* 3 LED implementation
  *
- * @author Cory Sharp <cssharp@eecs.berkeley.edu>
- * @author: Jan Hauer <hauer@tkn.tu-berlin.de> (62500hz)
- * @see  Please refer to TEP 102 for more information about this component and its
- *          intended use.
+ * @author Peter A. Bigot <pab@peoplepowerco.com>
+ * @author João Gonçalves
  */
 
-#include "Timer.h"
-#include "Timer62500hz.h"
-configuration HilTimer62500hzC
-{
-  provides interface Timer<T62500hz> as Timer62500hz[ uint8_t num ];
+module LedsP @safe() {
+  provides interface Leds;
+  uses {
+    interface GeneralIO as Led0;
+    interface GeneralIO as Led1;
+    interface GeneralIO as Led2;
+  }
 }
-implementation
-{
-  components new Alarm62500hz32VirtualizedC() as Alarm;
-  components new AlarmToTimerC(T62500hz);
-  components new VirtualizeTimerC(T62500hz,uniqueCount(UQ_TIMER_62500HZ));
-
-  Timer62500hz = VirtualizeTimerC;
-
-  VirtualizeTimerC.TimerFrom -> AlarmToTimerC;
-  AlarmToTimerC.Alarm -> Alarm;
+implementation {
 }

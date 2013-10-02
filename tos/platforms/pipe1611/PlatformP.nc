@@ -1,5 +1,5 @@
-
-/* Copyright (c) 2000-2003 The Regents of the University of California.
+/*
+ * Copyright (c) 2010-2011 Eric B. Decker
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -8,10 +8,12 @@
  *
  * - Redistributions of source code must retain the above copyright
  *   notice, this list of conditions and the following disclaimer.
+ *
  * - Redistributions in binary form must reproduce the above copyright
  *   notice, this list of conditions and the following disclaimer in the
  *   documentation and/or other materials provided with the
  *   distribution.
+ *
  * - Neither the name of the copyright holders nor the names of
  *   its contributors may be used to endorse or promote products derived
  *   from this software without specific prior written permission.
@@ -28,31 +30,61 @@
  * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
  * OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-
-/**
- * Alarm62500hzC is the alarm for async 62500hz alarms (virtualized)
  *
- * @author Cory Sharp <cssharp@eecs.berkeley.edu>
- * @author Jan Hauer <hauer@tkn.tu-berlin.de>
- * @see  Please refer to TEP 102 for more information about this component and its
- *          intended use.
+ * Warning: many of these routines directly touch cpu registers
+ * it is assumed that this is initilization code and interrupts are
+ * off.
+ *
+ * @author Eric B. Decker
  */
 
-//#include "Timer.h"
-#include "Timer62500hz.h"
-generic configuration Alarm62500hz32VirtualizedC()
-{
-  provides interface Alarm<T62500hz,uint32_t>;
-}
-implementation
-{
-  components Alarm32khzTo62500hzTransformC, Alarm32khz32VirtualizedP;
-  enum {
-    CLIENT_ID = unique(UQ_ALARM_32KHZ32),
-  };
-  
-  Alarm = Alarm32khzTo62500hzTransformC.Alarm[CLIENT_ID];
-  Alarm32khzTo62500hzTransformC.AlarmFrom[CLIENT_ID] -> Alarm32khz32VirtualizedP.Alarm[CLIENT_ID];
+#ifdef notdef
+#include "hardware.h"
+#include "platform_version.h"
+
+const uint8_t _major = MAJOR;
+const uint8_t _minor = MINOR;
+const uint8_t _build = _BUILD;
+
+
+#define BOOT_MAJIK 0x01021910
+noinit uint32_t boot_majik;
+noinit uint16_t boot_count;
+
+#endif
+
+
+module PlatformP {
+  provides interface Init;
+  uses {
+    interface Init as PlatformPins;
+    interface Init as PlatformLeds;
+    interface Init as Msp430Pmm;
+    interface Init as PlatformClock;
+    interface Init as MoteInit;
+    interface Init as PeripheralInit;
+  }
 }
 
+implementation {
+
+  void uwait(uint16_t u) {
+    uint16_t t0 = TA0R;
+    while((TA0R - t0) <= u);
+  }
+
+  command error_t Init.init() {
+    WDTCTL = WDTPW + WDTHOLD;    // Stop watchdog timer
+
+    call PlatformPins.init();   // Initializes the GIO pins
+    call PlatformLeds.init();   // Initializes the Leds
+    call PlatformClock.init();  // Initializes UCS
+    call PeripheralInit.init();
+    return SUCCESS;
+  }
+
+  /***************** Defaults ***************/
+  default command error_t PeripheralInit.init() {
+    return SUCCESS;
+  }
+}

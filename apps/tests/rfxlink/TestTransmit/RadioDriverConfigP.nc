@@ -53,6 +53,8 @@ module RadioDriverConfigP
 		interface Si443xDriverConfig as RadioDriverConfig;
 #elif defined(PLATFORM_PIPE5510)
 		interface CC2520DriverConfig as RadioDriverConfig;
+#elif defined(PLATFORM_PIPE1611)
+		interface CC2520DriverConfig as RadioDriverConfig;
 #endif
 	}
 }

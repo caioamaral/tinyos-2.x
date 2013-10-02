@@ -1,6 +1,6 @@
-// $Id: Timer62500P.nc,v 1.2 2010-06-29 22:07:56 scipio Exp $
-/*									tab:4
- * Copyright (c) 2005 The Regents of the University  of California.  
+/*
+ * Copyright (c) 2013 Eric B. Decker
+ * Copyright (c) 2000-2003 The Regents of the University of California.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -9,11 +9,13 @@
  *
  * - Redistributions of source code must retain the above copyright
  *   notice, this list of conditions and the following disclaimer.
+ *
  * - Redistributions in binary form must reproduce the above copyright
  *   notice, this list of conditions and the following disclaimer in the
  *   documentation and/or other materials provided with the
  *   distribution.
- * - Neither the name of the University of California nor the names of
+ *
+ * - Neither the name of the copyright holders nor the names of
  *   its contributors may be used to endorse or promote products derived
  *   from this software without specific prior written permission.
  *
@@ -29,23 +31,27 @@
  * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
  * OF THE POSSIBILITY OF SUCH DAMAGE.
- *
  */
-/*
+
+/**
+ * CounterRadioC provides a 32-bit counter for the radio. It provides the
+ * link between TRadio (generic radio timestamping precision) and the actual
+ * timer implementations.
  *
- * @author Philip Levis
- * @author Cory Sharp
- * @author: Jan Hauer <hauer@tkn.tu-berlin.de> (62500hz)
- * @date   May 16 2005
- */ 
+ * @author Thomas Schmid
+ * @author Eric B. Decker <cire831@gmail.com>
+ * @see  Please refer to TEP 102 for more information about this component and its
+ *          intended use.
+ */
 
-#include "Timer.h"
-
-configuration Timer62500P {
-  provides interface Timer<T62500hz> as Timer62500[uint8_t id];
+configuration CounterRadio32C {
+  provides interface Counter<TMicro,uint32_t>;
 }
 implementation {
-  components HilTimer62500hzC;
-  Timer62500 = HilTimer62500hzC;
-}
+  components HilSam3TCCounterTMicroC as CounterFrom;
+  components new TransformCounterC(TMicro,uint32_t,TMicro,uint16_t,0,uint16_t) as Transform;
 
+  Counter = Transform;
+
+  Transform.CounterFrom -> CounterFrom;
+}
